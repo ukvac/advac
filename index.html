@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Immigration Advisor — Initial Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2140;
+    --navy-mid: #1a3560;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f9f6ef;
+    --cream-dark: #f0ead8;
+    --text: #1a1a2e;
+    --text-light: #4a5568;
+    --white: #ffffff;
+    --red: #c0392b;
+    --green: #1a7a4a;
+    --green-light: #e8f5ee;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --border: #d4c9a8;
+    --shadow: 0 4px 24px rgba(15,33,64,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-mark {
+    width: 40px; height: 40px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  header p {
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  /* DISCLAIMER BANNER */
+  .disclaimer-banner {
+    background: var(--amber-light);
+    border-bottom: 2px solid var(--amber);
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #78350f;
+    font-weight: 500;
+  }
+
+  /* PROGRESS BAR */
+  .progress-container {
+    background: var(--navy-mid);
+    padding: 12px 24px;
+  }
+  .progress-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-text {
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    animation: fadeSlideIn 0.4s ease;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .section-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* FORM FIELDS */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-group.hidden { display: none; }
+  label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  label .required { color: var(--red); margin-left: 3px; }
+  label .hint {
+    display: block;
+    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  select, input[type="date"], input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5568' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  select:focus, input:focus {
+    outline: none;
+    border-color: var(--navy-mid);
+    box-shadow: 0 0 0 3px rgba(26,53,96,0.12);
+    background: var(--white);
+  }
+
+  /* RADIO GROUP */
+  .radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .radio-group.cols-2 { grid-template-columns: 1fr 1fr; }
+  .radio-group.cols-1 { grid-template-columns: 1fr; }
+  .radio-option {
+    position: relative;
+  }
+  .radio-option input {
+    position: absolute; opacity: 0; width: 0; height: 0;
+  }
+  .radio-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 0.87rem;
+    line-height: 1.4;
+  }
+  .radio-option label:hover {
+    border-color: var(--navy-mid);
+    background: var(--white);
+  }
+  .radio-option input:checked + label {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 3px 12px rgba(15,33,64,0.2);
+  }
+  .radio-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* CHECKBOX GROUP */
+  .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+  .check-option { position: relative; }
+  .check-option input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-option label {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 0.87rem;
+  }
+  .check-option label:hover { border-color: var(--navy-mid); background: var(--white); }
+  .check-option input:checked + label {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+  }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 2px solid currentColor;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+  }
+  .check-option input:checked + label .check-box::after {
+    content: '✓';
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    margin-top: 16px;
+    display: none;
+  }
+  .info-box.show { display: block; }
+  .info-box.warning { background: #fef3c7; border-left: 4px solid var(--amber); color: #78350f; }
+  .info-box.danger { background: #fde8e8; border-left: 4px solid var(--red); color: #7f1d1d; }
+  .info-box.success { background: var(--green-light); border-left: 4px solid var(--green); color: #14532d; }
+  .info-box.info { background: #e8f0fe; border-left: 4px solid #3b82f6; color: #1e3a5f; }
+  .info-box strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--cream-dark);
+    margin: 28px 0;
+  }
+
+  /* SUBSECTION */
+  .subsection {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+    border: 1px solid var(--border);
+  }
+  .subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsection-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 16px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* BUTTONS */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(15,33,64,0.25);
+  }
+  .btn-primary:hover {
+    background: var(--navy-mid);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(15,33,64,0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--navy); background: var(--cream); }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+    box-shadow: 0 4px 14px rgba(201,168,76,0.3);
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* RESULTS */
+  #results-section { display: none; }
+  .result-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .result-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .result-icon.green { background: var(--green-light); }
+  .result-icon.amber { background: var(--amber-light); }
+  .result-icon.red { background: #fde8e8; }
+
+  .eligibility-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .eligibility-card {
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 1.5px solid;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .eligibility-card.eligible { border-color: var(--green); background: var(--green-light); }
+  .eligibility-card.possible { border-color: var(--amber); background: var(--amber-light); }
+  .eligibility-card.not-eligible { border-color: #fca5a5; background: #fde8e8; }
+  .eligibility-card.info-card { border-color: #93c5fd; background: #e8f0fe; }
+  .elig-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .elig-content h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+  .elig-content p { font-size: 0.83rem; line-height: 1.6; color: var(--text); }
+  .elig-content .elig-status {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    opacity: 0.7;
+  }
+
+  .next-steps {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .next-steps h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    color: var(--gold-light);
+  }
+  .next-steps ol {
+    padding-left: 20px;
+    font-size: 0.87rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
+  .cta-box p { font-size: 0.83rem; opacity: 0.8; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .section-card { padding: 24px 20px; }
+    .radio-group { grid-template-columns: 1fr; }
+    .radio-group.cols-2 { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.1rem; }
+    .cta-box { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">⚖️</div>
+    <div>
+      <h1>UK Immigration Advisor</h1>
+      <p>Confidential Initial Assessment Tool</p>
+    </div>
+  </div>
+</header>
+
+<div class="disclaimer-banner">
+  ⚠️ This tool provides general information only and does not constitute legal advice. For your specific situation, always consult a regulated immigration advisor (OISC) or solicitor.
+</div>
+
+<div class="progress-container">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">Step 1 of 6</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== SECTION 1: PERSONAL ===== -->
+<div class="section-card" id="sec1">
+  <div class="section-label">Section 1 of 6</div>
+  <div class="section-title">Personal Information</div>
+  <div class="section-subtitle">Let's start with some basic details. This helps us tailor your assessment accurately.</div>
+
+  <div class="two-col">
+    <div class="field-group">
+      <label>Your Age <span class="required">*</span></label>
+      <input type="number" id="age" min="1" max="120" placeholder="e.g. 34">
+    </div>
+    <div class="field-group">
+      <label>Nationality <span class="required">*</span>
+        <span class="hint">Country of your current passport</span>
+      </label>
+      <input type="text" id="nationality" placeholder="e.g. Nigerian, Indian, Pakistani...">
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Country of Birth <span class="required">*</span></label>
+    <input type="text" id="birthCountry" placeholder="e.g. Nigeria">
+  </div>
+
+  <div class="field-group">
+    <label>Are you currently in the UK? <span class="required">*</span></label>
+    <div class="radio-group cols-2">
+      <div class="radio-option">
+        <input type="radio" name="inUK" id="inUK_yes" value="yes">
+        <label for="inUK_yes"><span class="radio-icon">🇬🇧</span>Yes, I am currently in the UK</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="inUK" id="inUK_no" value="no">
+        <label for="inUK_no"><span class="radio-icon">✈️</span>No, I am outside the UK</label>
+      </div>
+    </div>
+    <div class="info-box info" id="outsideUK_info">
+      <strong>Applying from outside the UK</strong>
+      Some routes (like family reunion, skilled worker, student) are available from outside. The assessment below will still identify which routes may apply to you.
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Do you have any criminal convictions? <span class="required">*</span>
+      <span class="hint">In the UK or overseas — include spent and unspent convictions</span>
+    </label>
+    <div class="radio-group">
+      <div class="radio-option">
+        <input type="radio" name="criminal" id="crim_none" value="none">
+        <label for="crim_none"><span class="radio-icon">✅</span>No convictions</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="criminal" id="crim_minor" value="minor">
+        <label for="crim_minor"><span class="radio-icon">⚠️</span>Minor / spent conviction</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="criminal" id="crim_serious" value="serious">
+        <label for="crim_serious"><span class="radio-icon">🔴</span>Serious / recent conviction</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="criminal" id="crim_unsure" value="unsure">
+        <label for="crim_unsure"><span class="radio-icon">❓</span>Not sure</label>
+      </div>
+    </div>
+    <div class="info-box danger" id="crim_serious_warn">
+      <strong>⚠️ Important Note</strong>
+      Serious criminal convictions can significantly affect all immigration applications, including ILR and citizenship. You should seek specialist legal advice before applying for anything.
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="goTo(2)">Continue →</button>
+  </div>
+</div>
+
+<!-- ===== SECTION 2: CURRENT STATUS ===== -->
+<div class="section-card" id="sec2" style="display:none">
+  <div class="section-label">Section 2 of 6</div>
+  <div class="section-title">Your Current Immigration Status</div>
+  <div class="section-subtitle">Select the option that best describes your situation right now. Be as accurate as possible — this drives the rest of your assessment.</div>
+
+  <div class="field-group">
+    <label>What is your current immigration status? <span class="required">*</span></label>
+    <div class="radio-group cols-1">
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_visitor" value="visitor">
+        <label for="st_visitor"><span class="radio-icon">🛂</span><div><strong>Visitor / Tourist</strong><br><small>Entered on a visitor visa or visa-free for tourism, family visit, or business</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_overstayer" value="overstayer">
+        <label for="st_overstayer"><span class="radio-icon">⏰</span><div><strong>Overstayer</strong><br><small>My visa or leave to remain has expired and I have not left the UK</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_skilled" value="skilled">
+        <label for="st_skilled"><span class="radio-icon">💼</span><div><strong>Skilled Worker (Tier 2 / Skilled Worker Visa)</strong><br><small>Sponsored by a UK employer with a valid CoS</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_student" value="student">
+        <label for="st_student"><span class="radio-icon">🎓</span><div><strong>Student (Tier 4 / Student Visa)</strong><br><small>Studying at a licensed UK educational institution</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_family" value="family">
+        <label for="st_family"><span class="radio-icon">👨‍👩‍👧</span><div><strong>Family Visa</strong><br><small>Spouse/partner, parent, or child of a British citizen or settled person</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_ilr" value="ilr">
+        <label for="st_ilr"><span class="radio-icon">🏠</span><div><strong>ILR / Settled Status</strong><br><small>I already have Indefinite Leave to Remain or EU Settled Status</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_euss" value="euss">
+        <label for="st_euss"><span class="radio-icon">🇪🇺</span><div><strong>EU Pre-Settled / Settled Status (EUSS)</strong><br><small>EU, EEA or Swiss national with EUSS status</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_asylum" value="asylum">
+        <label for="st_asylum"><span class="radio-icon">🛡️</span><div><strong>Asylum Seeker / Refugee</strong><br><small>I have claimed or am considering claiming asylum</small></div></label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" name="status" id="st_other" value="other">
+        <label for="st_other"><span class="radio-icon">📋</span><div><strong>Other / Not sure</strong><br><small>BN(O), Ancestry, Domestic Worker, or unsure of my status</small></div></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTo(1)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(3)">Continue →</button>
+  </div>
+</div>
+
+<!-- ===== SECTION 3: STATUS-SPECIFIC QUESTIONS ===== -->
+<div class="section-card" id="sec3" style="display:none">
+  <div class="section-label">Section 3 of 6</div>
+  <div class="section-title" id="sec3Title">Visa & Entry Details</div>
+  <div class="section-subtitle" id="sec3Sub">Please provide details about your specific situation.</div>
+
+  <!-- VISITOR -->
+  <div id="q_visitor" class="hidden">
+    <div class="field-group">
+      <label>When did you last enter the UK? <span class="required">*</span></label>
+      <input type="date" id="visitor_entry">
+    </div>
+    <div class="field-group">
+      <label>How long was your visa / leave granted for? <span class="required">*</span></label>
+      <select id="visitor_duration">
+        <option value="">— Select —</option>
+        <option value="6m">6 months (standard visitor)</option>
+        <option value="11m">11 months (marriage / civil partnership visit)</option>
+        <option value="2y">2 years (long stay visitor)</option>
+        <option value="5y">5 years (long stay visitor)</option>
+        <option value="10y">10 years (long stay visitor)</option>
+        <option value="visa_free">Visa-free entry (e.g. ETA or eVisa exemption)</option>
+        <option value="unsure">Not sure</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>What is the primary purpose of your current visit? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="visit_purpose" id="vp_tourism" value="tourism"><label for="vp_tourism"><span class="radio-icon">🏖️</span>Tourism / holiday</label></div>
+        <div class="radio-option"><input type="radio" name="visit_purpose" id="vp_family_visit" value="family_visit"><label for="vp_family_visit"><span class="radio-icon">👨‍👩‍👧</span>Visiting family</label></div>
+        <div class="radio-option"><input type="radio" name="visit_purpose" id="vp_business" value="business"><label for="vp_business"><span class="radio-icon">💼</span>Business meetings</label></div>
+        <div class="radio-option"><input type="radio" name="visit_purpose" id="vp_marriage" value="marriage"><label for="vp_marriage"><span class="radio-icon">💍</span>Getting married in the UK</label></div>
+        <div class="radio-option"><input type="radio" name="visit_purpose" id="vp_medical" value="medical"><label for="vp_medical"><span class="radio-icon">🏥</span>Medical treatment</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Are you planning to stay beyond your leave expiry? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="v_overstay_plan" id="vop_yes" value="yes"><label for="vop_yes">Yes, I want to remain longer</label></div>
+        <div class="radio-option"><input type="radio" name="v_overstay_plan" id="vop_no" value="no"><label for="vop_no">No, I plan to leave before it expires</label></div>
+      </div>
+      <div class="info-box warning" id="visitor_overstay_warn">
+        <strong>⚠️ Visitor Visa Overstay Risk</strong>
+        Overstaying a visitor visa is a serious breach of immigration law. It may lead to removal, a re-entry ban, and affect future applications. You generally cannot switch to most other visas from inside the UK on a visitor visa.
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Do you have a British or settled partner or spouse? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="v_partner" id="vpart_yes" value="yes"><label for="vpart_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="v_partner" id="vpart_no" value="no"><label for="vpart_no">No</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERSTAYER -->
+  <div id="q_overstayer" class="hidden">
+    <div class="info-box danger show">
+      <strong>🔴 Overstaying is a Serious Matter</strong>
+      You have overstayed your leave to remain in the UK. This does not mean all routes are closed, but it is important to understand your situation accurately. Answer the questions below carefully.
+    </div>
+    <div class="field-group" style="margin-top:20px">
+      <label>When did your last valid leave to remain expire? <span class="required">*</span></label>
+      <input type="date" id="overstay_expired">
+    </div>
+    <div class="field-group">
+      <label>What type of visa did you originally hold? <span class="required">*</span></label>
+      <select id="overstay_visa_type">
+        <option value="">— Select original visa type —</option>
+        <option value="visitor">Visitor / Tourist</option>
+        <option value="student">Student (Tier 4)</option>
+        <option value="skilled">Skilled Worker (Tier 2)</option>
+        <option value="family">Family (spouse/partner/parent)</option>
+        <option value="work_other">Other work visa</option>
+        <option value="eea">EEA / EU (pre-Brexit)</option>
+        <option value="asylum">Asylum (refused)</option>
+        <option value="none">Never had a visa / entered illegally</option>
+        <option value="unsure">Not sure</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Have you ever applied to regularise your status since overstaying? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="ov_applied" id="ova_yes" value="yes"><label for="ova_yes">Yes, I've submitted an application</label></div>
+        <div class="radio-option"><input type="radio" name="ov_applied" id="ova_no" value="no"><label for="ova_no">No, I have not applied</label></div>
+        <div class="radio-option"><input type="radio" name="ov_applied" id="ova_refused" value="refused"><label for="ova_refused">Yes, but it was refused</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Do you have a British citizen or settled spouse/partner? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="ov_partner" id="ovp_yes" value="yes"><label for="ovp_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="ov_partner" id="ovp_no" value="no"><label for="ovp_no">No</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Do you have children born in the UK? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="ov_ukborn_child" id="ovbc_yes_brit" value="yes_british"><label for="ovbc_yes_brit">Yes — and the child is a British citizen</label></div>
+        <div class="radio-option"><input type="radio" name="ov_ukborn_child" id="ovbc_yes_notbrit" value="yes_not_british"><label for="ovbc_yes_notbrit">Yes — but child is not British</label></div>
+        <div class="radio-option"><input type="radio" name="ov_ukborn_child" id="ovbc_no" value="no"><label for="ovbc_no">No children born in the UK</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Have you been continuously residing in the UK for 10 or more years? <span class="required">*</span>
+        <span class="hint">This may include periods with and without leave — known as the "10-year long residence" route</span>
+      </label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="ov_10yr" id="ov10_yes" value="yes"><label for="ov10_yes">Yes, I believe so</label></div>
+        <div class="radio-option"><input type="radio" name="ov_10yr" id="ov10_no" value="no"><label for="ov10_no">No, fewer than 10 years</label></div>
+        <div class="radio-option"><input type="radio" name="ov_10yr" id="ov10_unsure" value="unsure"><label for="ov10_unsure">Not sure</label></div>
+      </div>
+      <div class="info-box info" id="ten_year_info">
+        <strong>10-Year Long Residence Route</strong>
+        If you have lived in the UK continuously for 10 years — even with gaps or overstaying — you may qualify for ILR under the "Long Residence" rule. Absences must be no more than 18 months total and no single absence over 6 months. Legal advice is essential for this route.
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Are you aware of any removal or deportation proceedings against you? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="ov_removal" id="ovr_yes" value="yes"><label for="ovr_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="ov_removal" id="ovr_no" value="no"><label for="ovr_no">No</label></div>
+      </div>
+      <div class="info-box danger" id="removal_warn">
+        <strong>🚨 Urgent — Seek Legal Help Immediately</strong>
+        If removal proceedings are active, you may have very limited time to act. Contact an OISC-regulated advisor or immigration solicitor immediately. You may be able to appeal or apply for a stay of removal.
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLED WORKER -->
+  <div id="q_skilled" class="hidden">
+    <div class="field-group">
+      <label>When did you first enter the UK on a Skilled Worker / Tier 2 visa? <span class="required">*</span></label>
+      <input type="date" id="skilled_entry">
+    </div>
+    <div class="field-group">
+      <label>Have you been continuously working for the same sponsor? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="sw_same_sponsor" id="sws_yes" value="yes"><label for="sws_yes">Yes, same employer throughout</label></div>
+        <div class="radio-option"><input type="radio" name="sw_same_sponsor" id="sws_changed" value="changed"><label for="sws_changed">No, I have changed employers (with new CoS each time)</label></div>
+        <div class="radio-option"><input type="radio" name="sw_same_sponsor" id="sws_gap" value="gap"><label for="sws_gap">There were gaps in my sponsorship</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>What is your current salary (annual gross)? <span class="required">*</span>
+        <span class="hint">This is relevant for ILR eligibility — thresholds apply</span>
+      </label>
+      <select id="skilled_salary">
+        <option value="">— Select salary band —</option>
+        <option value="under_26k">Under £26,200</option>
+        <option value="26k_38k">£26,200 – £38,700</option>
+        <option value="38k_plus">Over £38,700</option>
+        <option value="unsure">Not sure / varies</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Is your occupation on the Shortage Occupation List or a specified role? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="sw_shortage" id="sho_yes" value="yes"><label for="sho_yes">Yes (e.g. nurse, doctor, engineer, teacher)</label></div>
+        <div class="radio-option"><input type="radio" name="sw_shortage" id="sho_no" value="no"><label for="sho_no">No</label></div>
+        <div class="radio-option"><input type="radio" name="sw_shortage" id="sho_unsure" value="unsure"><label for="sho_unsure">Not sure</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Total time spent outside the UK in the last 5 years <span class="required">*</span>
+        <span class="hint">Continuous residence for ILR allows no more than 180 days absence per year</span>
+      </label>
+      <select id="skilled_absences">
+        <option value="">— Select —</option>
+        <option value="under_180">Under 180 days total</option>
+        <option value="180_450">180 – 450 days</option>
+        <option value="over_450">Over 450 days</option>
+        <option value="unsure">Not sure</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Do you have dependants in the UK? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="sw_dependants" id="swd_none" value="none"><label for="swd_none"><span class="radio-icon">👤</span>No dependants</label></div>
+        <div class="radio-option"><input type="radio" name="sw_dependants" id="swd_partner" value="partner"><label for="swd_partner"><span class="radio-icon">👫</span>Partner only</label></div>
+        <div class="radio-option"><input type="radio" name="sw_dependants" id="swd_children" value="children"><label for="swd_children"><span class="radio-icon">👨‍👩‍👧</span>Partner and/or children</label></div>
+        <div class="radio-option"><input type="radio" name="sw_dependants" id="swd_other" value="other"><label for="swd_other"><span class="radio-icon">👴</span>Other family (parents, siblings)</label></div>
+      </div>
+    </div>
+
+    <!-- Dependants sub-section -->
+    <div id="dependants_section" class="subsection hidden">
+      <div class="subsection-title">Dependant Details</div>
+      <div class="field-group">
+        <label>Are your dependants currently on a dependent visa linked to your Skilled Worker visa? <span class="required">*</span></label>
+        <div class="radio-group cols-2">
+          <div class="radio-option"><input type="radio" name="dep_visa" id="dv_yes" value="yes"><label for="dv_yes">Yes</label></div>
+          <div class="radio-option"><input type="radio" name="dep_visa" id="dv_no" value="no"><label for="dv_no">No</label></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>How many dependent children do you have in the UK? <span class="required">*</span></label>
+        <select id="dep_children_num">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4plus">4 or more</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Were any of your children born in the UK? <span class="required">*</span></label>
+        <div class="radio-group cols-2">
+          <div class="radio-option"><input type="radio" name="dep_uk_born" id="dub_yes" value="yes"><label for="dub_yes">Yes</label></div>
+          <div class="radio-option"><input type="radio" name="dep_uk_born" id="dub_no" value="no"><label for="dub_no">No</label></div>
+        </div>
+        <div class="info-box info show" style="margin-top:10px;">
+          <strong>Note on Children Born in the UK</strong>
+          A child born in the UK to a parent with limited leave is not automatically British. However, once a parent gets ILR, the child can apply for ILR as a dependant and later for British citizenship if they meet the requirements.
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Does your partner work in the UK? <span class="required">*</span></label>
+        <div class="radio-group">
+          <div class="radio-option"><input type="radio" name="dep_partner_work" id="dpw_yes" value="yes"><label for="dpw_yes">Yes, they have the right to work</label></div>
+          <div class="radio-option"><input type="radio" name="dep_partner_work" id="dpw_no" value="no"><label for="dpw_no">No, they are not working</label></div>
+          <div class="radio-option"><input type="radio" name="dep_partner_work" id="dpw_na" value="na"><label for="dpw_na">No partner in the UK</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT -->
+  <div id="q_student" class="hidden">
+    <div class="field-group">
+      <label>When did you first arrive in the UK on a Student visa? <span class="required">*</span></label>
+      <input type="date" id="student_entry">
+    </div>
+    <div class="field-group">
+      <label>What level of study are you currently undertaking? <span class="required">*</span></label>
+      <select id="student_level">
+        <option value="">— Select —</option>
+        <option value="undergrad">Undergraduate (Bachelor's)</option>
+        <option value="masters">Postgraduate (Master's)</option>
+        <option value="phd">PhD / Doctorate</option>
+        <option value="college">College / FE level</option>
+        <option value="english">English language course</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Have you worked in the UK during your studies? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="st_work" id="stw_no" value="no"><label for="stw_no">No, I have not worked</label></div>
+        <div class="radio-option"><input type="radio" name="st_work" id="stw_parttime" value="part_time"><label for="stw_parttime">Yes, part-time within my visa hours limit</label></div>
+        <div class="radio-option"><input type="radio" name="st_work" id="stw_excess" value="excess"><label for="stw_excess">Yes, but I may have exceeded my hours</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Do you have a job offer or are you considering a Graduate or Skilled Worker visa after studies? <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-option"><input type="radio" name="st_post" id="stp_gv" value="graduate"><label for="stp_gv">Yes — I want to apply for the Graduate visa</label></div>
+        <div class="radio-option"><input type="radio" name="st_post" id="stp_sw" value="skilled"><label for="stp_sw">Yes — I have a job offer (Skilled Worker)</label></div>
+        <div class="radio-option"><input type="radio" name="st_post" id="stp_no" value="no"><label for="stp_no">No plans yet</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAMILY -->
+  <div id="q_family" class="hidden">
+    <div class="field-group">
+      <label>What is your relationship to the British or settled person? <span class="required">*</span></label>
+      <div class="radio-group cols-1">
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_spouse" value="spouse"><label for="fr_spouse"><span class="radio-icon">💍</span>Spouse or civil partner of a British citizen</label></div>
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_partner" value="partner"><label for="fr_partner"><span class="radio-icon">💑</span>Unmarried / cohabiting partner (2 years together)</label></div>
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_child" value="child"><label for="fr_child"><span class="radio-icon">👶</span>Child (under 18) of a British / settled parent</label></div>
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_adult_child" value="adult_child"><label for="fr_adult_child"><span class="radio-icon">🧑</span>Adult child of a British / settled parent</label></div>
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_parent" value="parent"><label for="fr_parent"><span class="radio-icon">👴</span>Parent of a British child (sole responsibility)</label></div>
+        <div class="radio-option"><input type="radio" name="fam_rel" id="fr_dependent_rel" value="dependent_rel"><label for="fr_dependent_rel"><span class="radio-icon">🤝</span>Adult dependent relative (long-term personal care needs)</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>How long have you been in the UK on this family visa? <span class="required">*</span></label>
+      <select id="fam_duration">
+        <option value="">— Select —</option>
+        <option value="under_2">Under 2 years</option>
+        <option value="2_to_5">2–5 years</option>
+        <option value="5_plus">5 or more years</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Is your relationship still subsisting (ongoing)? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="fam_ongoing" id="fo_yes" value="yes"><label for="fo_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="fam_ongoing" id="fo_no" value="no"><label for="fo_no">No, relationship has broken down</label></div>
+      </div>
+      <div class="info-box warning" id="dv_info" style="display:none">
+        <strong>Domestic Violence Concession / DVILR</strong>
+        If your relationship broke down due to domestic violence, you may be eligible to apply for ILR immediately outside the normal qualifying period. Please seek specialist support.
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Is the British/settled sponsor currently living in the UK? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="fam_sponsor_uk" id="fsk_yes" value="yes"><label for="fsk_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="fam_sponsor_uk" id="fsk_no" value="no"><label for="fsk_no">No</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ILR -->
+  <div id="q_ilr" class="hidden">
+    <div class="info-box success show">
+      <strong>✅ You Already Have ILR or Settled Status</strong>
+      This is a strong foundation. The next steps typically involve either British citizenship (naturalisation) or maintaining your ILR. Let's gather a few more details.
+    </div>
+    <div class="field-group" style="margin-top:20px">
+      <label>How long have you held ILR / Settled Status? <span class="required">*</span></label>
+      <select id="ilr_duration">
+        <option value="">— Select —</option>
+        <option value="under_1">Under 1 year</option>
+        <option value="1_to_5">1–5 years</option>
+        <option value="over_5">Over 5 years</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>How long have you lived in the UK in total? <span class="required">*</span></label>
+      <select id="ilr_total_time">
+        <option value="">— Select —</option>
+        <option value="under_3">Under 3 years</option>
+        <option value="3_to_5">3–5 years</option>
+        <option value="5_plus">5 or more years</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>Are you married to or in a civil partnership with a British citizen? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="ilr_bc_spouse" id="ibs_yes" value="yes"><label for="ibs_yes">Yes</label></div>
+        <div class="radio-option"><input type="radio" name="ilr_bc_spouse" id="ibs_no" value="no"><label for="ibs_no">No</label></div>
+      </div>
+      <div class="info-box info" id="ilr_spouse_info">
+        <strong>Spouse of British Citizen — Reduced Qualifying Period</strong>
+        If you're married to a British citizen, you may be eligible to apply for naturalisation after only 3 years of residence (instead of the standard 5 years), provided you have held ILR.
+      </div>
+    </div>
+  </div>
+
+  <!-- EUSS -->
+  <div id="q_euss" class="hidden">
+    <div class="field-group">
+      <label>What is your EUSS status? <span class="required">*</span></label>
+      <div class="radio-group cols-2">
+        <div class="radio-option"><input type="radio" name="euss_type" id="euss_settled" value="settled"><label for="euss_settled">🟢 Settled Status (5 years continuous residence)</label></div>
+        <div class="radio-option"><input type="radio" name="euss_type" id="euss_pre" value="pre_settled"><label for="euss_pre">🟡 Pre-Settled Status (under 5 years)</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>How long have you lived in the UK continuously? <span class="required">*</span></label>
+      <select id="euss_years">
+        <option value="">— Select —</option>
+        <option value="under_1">Under 1 year</option>
+        <option value="1_3">1–3 years</option>
+        <option value="3_5">3–5 years</option>
+        <option value="5_6">5–6 years</option>
+        <option value="over_6">6 or more years</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ASYLUM -->
+  <div id="q_asylum" class="hidden">
+    <div class="info-box info show">
+      <strong>ℹ️ Asylum Claims</strong>
+      Asylum law is highly complex and deeply personal. The information here is very general. We strongly recommend engaging with a specialist refugee law advisor or organisation such as Refugee Action, the Refugee Council, or a legal aid solicitor.
+    </div>
+    <div class="field-group" style="margin-top:20px">
+      <label>What stage is your asylum claim at? <span class="required">*</span></label>
+      <div class="radio-group cols-1">
+        <div class="radio-option"><input type="radio" name="asy_stage" id="as_pending" value="pending"><label for="as_pending">Pending — initial decision awaited</label></div>
+        <div class="radio-option"><input type="radio" name="asy_stage" id="as_refused" value="refused"><label for="as_refused">Refused — considering appeal</label></div>
+        <div class="radio-option"><input type="radio" name="asy_stage" id="as_appeal" value="appeal"><label for="as_appeal">On appeal</label></div>
+        <div class="radio-option"><input type="radio" name="asy_stage" id="as_granted" value="granted"><label for="as_granted">Granted — I have refugee status or HP</label></div>
+        <div class="radio-option"><input type="radio" name="asy_stage" id="as_notyet" value="not_yet"><label for="as_notyet">Have not yet claimed asylum</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Country you are fleeing from <span class="required">*</span></label>
+      <input type="text" id="asy_country" placeholder="e.g. Eritrea, Afghanistan, Iran...">
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTo(2)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(4)">Continue →</button>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: RESIDENCE & COMPLIANCE ===== -->
+<div class="section-card" id="sec4" style="display:none">
+  <div class="section-label">Section 4 of 6</div>
+  <div class="section-title">Residence History & Compliance</div>
+  <div class="section-subtitle">These questions apply to all applicants and help determine eligibility for long-term routes.</div>
+
+  <div class="field-group">
+    <label>How many years in total have you lived in the UK? <span class="required">*</span></label>
+    <select id="total_years">
+      <option value="">— Select —</option>
+      <option value="under_1">Under 1 year</option>
+      <option value="1_2">1–2 years</option>
+      <option value="2_5">2–5 years</option>
+      <option value="5_10">5–10 years</option>
+      <option value="over_10">Over 10 years</option>
+    </select>
+  </div>
+
+  <div class="field-group">
+    <label>Have you ever been outside the UK for more than 6 months at a time? <span class="required">*</span></label>
+    <div class="radio-group cols-2">
+      <div class="radio-option"><input type="radio" name="long_absence" id="la_yes" value="yes"><label for="la_yes">Yes</label></div>
+      <div class="radio-option"><input type="radio" name="long_absence" id="la_no" value="no"><label for="la_no">No</label></div>
+    </div>
+    <div class="info-box warning" id="long_absence_warn">
+      <strong>Long Absence Warning</strong>
+      A single absence of over 6 months can break "continuous residence" for ILR purposes on most routes. However, certain exceptions exist (e.g. compelling overseas circumstances). Legal advice is important here.
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Have you ever had a visa application refused in the UK? <span class="required">*</span></label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="refusal" id="ref_no" value="no"><label for="ref_no">No</label></div>
+      <div class="radio-option"><input type="radio" name="refusal" id="ref_yes_uk" value="yes_uk"><label for="ref_yes_uk">Yes — in the UK</label></div>
+      <div class="radio-option"><input type="radio" name="refusal" id="ref_yes_other" value="yes_other"><label for="ref_yes_other">Yes — in another country</label></div>
+      <div class="radio-option"><input type="radio" name="refusal" id="ref_yes_both" value="yes_both"><label for="ref_yes_both">Yes — in both UK and elsewhere</label></div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Have you ever been deported, removed, or subject to a re-entry ban from the UK? <span class="required">*</span></label>
+    <div class="radio-group cols-2">
+      <div class="radio-option"><input type="radio" name="deported" id="dep_no" value="no"><label for="dep_no">No</label></div>
+      <div class="radio-option"><input type="radio" name="deported" id="dep_yes" value="yes"><label for="dep_yes">Yes</label></div>
+    </div>
+    <div class="info-box danger" id="deport_warn">
+      <strong>🚨 Re-Entry Ban / Deportation History</strong>
+      A previous removal or deportation order can result in a long-term bar on re-entry to the UK. The length depends on the circumstances. Specialist legal advice is essential.
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Do you speak English? <span class="required">*</span>
+      <span class="hint">Required for most ILR and citizenship applications</span>
+    </label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="english" id="eng_fluent" value="fluent"><label for="eng_fluent">Yes — fluent / native speaker</label></div>
+      <div class="radio-option"><input type="radio" name="english" id="eng_test" value="test_passed"><label for="eng_test">Yes — I have passed an approved English test (e.g. IELTS)</label></div>
+      <div class="radio-option"><input type="radio" name="english" id="eng_degree" value="degree"><label for="eng_degree">Yes — I have a degree taught in English</label></div>
+      <div class="radio-option"><input type="radio" name="english" id="eng_limited" value="limited"><label for="eng_limited">Limited / basic English</label></div>
+      <div class="radio-option"><input type="radio" name="english" id="eng_no" value="no"><label for="eng_no">No / very little</label></div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Have you passed the "Life in the UK" test? <span class="required">*</span>
+      <span class="hint">Required for ILR and citizenship — unless you are under 18 or over 65</span>
+    </label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="lifeuk" id="luk_yes" value="yes"><label for="luk_yes">Yes, I have passed</label></div>
+      <div class="radio-option"><input type="radio" name="lifeuk" id="luk_no" value="no"><label for="luk_no">No, not yet</label></div>
+      <div class="radio-option"><input type="radio" name="lifeuk" id="luk_exempt" value="exempt"><label for="luk_exempt">Exempt (under 18 or over 65)</label></div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTo(3)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(5)">Continue →</button>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: FAMILY & FUTURE ===== -->
+<div class="section-card" id="sec5" style="display:none">
+  <div class="section-label">Section 5 of 6</div>
+  <div class="section-title">Family Connections & Future Goals</div>
+  <div class="section-subtitle">Understanding your family ties and long-term intentions helps us identify the best route for you.</div>
+
+  <div class="field-group">
+    <label>Do you have any close family members who are British citizens or settled in the UK? <span class="required">*</span></label>
+    <div class="checkbox-group" id="family_ties">
+      <div class="check-option"><input type="checkbox" id="ft_british_spouse" value="british_spouse"><label for="ft_british_spouse"><div class="check-box"></div>British citizen spouse / civil partner</label></div>
+      <div class="check-option"><input type="checkbox" id="ft_settled_partner" value="settled_partner"><label for="ft_settled_partner"><div class="check-box"></div>Settled (ILR) partner / spouse</label></div>
+      <div class="check-option"><input type="checkbox" id="ft_british_child" value="british_child"><label for="ft_british_child"><div class="check-box"></div>British citizen child</label></div>
+      <div class="check-option"><input type="checkbox" id="ft_british_parent" value="british_parent"><label for="ft_british_parent"><div class="check-box"></div>British citizen parent</label></div>
+      <div class="check-option"><input type="checkbox" id="ft_settled_parent" value="settled_parent"><label for="ft_settled_parent"><div class="check-box"></div>Settled (ILR) parent</label></div>
+      <div class="check-option"><input type="checkbox" id="ft_none" value="none"><label for="ft_none"><div class="check-box"></div>None of the above</label></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="field-group">
+    <label>What is your long-term goal? <span class="required">*</span></label>
+    <div class="radio-group cols-1">
+      <div class="radio-option"><input type="radio" name="goal" id="g_ilr" value="ilr"><label for="g_ilr"><span class="radio-icon">🏠</span><div><strong>Settle permanently in the UK (ILR)</strong><br><small>Indefinite Leave to Remain</small></div></label></div>
+      <div class="radio-option"><input type="radio" name="goal" id="g_citizen" value="citizenship"><label for="g_citizen"><span class="radio-icon">🇬🇧</span><div><strong>Become a British citizen</strong><br><small>Naturalisation or registration</small></div></label></div>
+      <div class="radio-option"><input type="radio" name="goal" id="g_extend" value="extend"><label for="g_extend"><span class="radio-icon">📋</span><div><strong>Extend my current visa</strong><br><small>Continue on my existing route</small></div></label></div>
+      <div class="radio-option"><input type="radio" name="goal" id="g_switch" value="switch"><label for="g_switch"><span class="radio-icon">🔄</span><div><strong>Switch to a different visa category</strong><br><small>Change immigration route</small></div></label></div>
+      <div class="radio-option"><input type="radio" name="goal" id="g_family" value="family_reunion"><label for="g_family"><span class="radio-icon">👨‍👩‍👧</span><div><strong>Bring family to the UK</strong><br><small>Sponsor a family member</small></div></label></div>
+      <div class="radio-option"><input type="radio" name="goal" id="g_regularise" value="regularise"><label for="g_regularise"><span class="radio-icon">🔧</span><div><strong>Regularise my irregular status</strong><br><small>Get back into the lawful system</small></div></label></div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Do you own or rent property in the UK? <span class="required">*</span></label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="property" id="prop_own" value="own"><label for="prop_own">Own property</label></div>
+      <div class="radio-option"><input type="radio" name="property" id="prop_rent" value="rent"><label for="prop_rent">Renting</label></div>
+      <div class="radio-option"><input type="radio" name="property" id="prop_neither" value="neither"><label for="prop_neither">Neither / staying with others</label></div>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Do you have any NHS surcharge debt or outstanding immigration fees owed? <span class="required">*</span></label>
+    <div class="radio-group cols-2">
+      <div class="radio-option"><input type="radio" name="nhs_debt" id="nhsd_no" value="no"><label for="nhsd_no">No</label></div>
+      <div class="radio-option"><input type="radio" name="nhs_debt" id="nhsd_yes" value="yes"><label for="nhsd_yes">Yes</label></div>
+    </div>
+    <div class="info-box warning" id="nhs_debt_warn">
+      <strong>NHS Debt</strong>
+      Outstanding NHS charges of £500 or more can lead to visa refusals. These must typically be cleared before or during an application.
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTo(4)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(6)">Continue →</button>
+  </div>
+</div>
+
+<!-- ===== SECTION 6: REVIEW ===== -->
+<div class="section-card" id="sec6" style="display:none">
+  <div class="section-label">Section 6 of 6</div>
+  <div class="section-title">Almost Done — Final Details</div>
+  <div class="section-subtitle">A few last questions to complete your assessment profile.</div>
+
+  <div class="field-group">
+    <label>Have you ever used false documents or deception in any UK visa application? <span class="required">*</span></label>
+    <div class="radio-group cols-2">
+      <div class="radio-option"><input type="radio" name="deception" id="dec_no" value="no"><label for="dec_no">No</label></div>
+      <div class="radio-option"><input type="radio" name="deception" id="dec_yes" value="yes"><label for="dec_yes">Yes</label></div>
+    </div>
+    <div class="info-box danger" id="deception_warn">
+      <strong>🚨 Deception — Serious Consequences</strong>
+      Using false documents or deception in a visa application can result in a 10-year ban from the UK. This is a complex area requiring specialist legal advice before any new application.
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Are you currently receiving any public funds? <span class="required">*</span>
+      <span class="hint">e.g. Universal Credit, Housing Benefit, Child Benefit, etc.</span>
+    </label>
+    <div class="radio-group">
+      <div class="radio-option"><input type="radio" name="pub_funds" id="pf_no" value="no"><label for="pf_no">No</label></div>
+      <div class="radio-option"><input type="radio" name="pub_funds" id="pf_yes" value="yes"><label for="pf_yes">Yes — I receive public funds</label></div>
+      <div class="radio-option"><input type="radio" name="pub_funds" id="pf_entitled" value="entitled"><label for="pf_entitled">Yes — but I am entitled to them (e.g. ILR holder, refugee)</label></div>
+    </div>
+    <div class="info-box warning" id="pub_funds_warn">
+      <strong>No Recourse to Public Funds (NRPF)</strong>
+      Most visa holders in the UK are subject to NRPF conditions. Claiming benefits when subject to NRPF can affect current and future applications, and may be an immigration offence.
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>Is there anything else relevant to your case you'd like to note?</label>
+    <textarea id="extra_notes" rows="4" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9rem;resize:vertical;background:var(--cream);" placeholder="e.g. mental health, exceptional circumstances, previous legal representation, pending applications, EU settlement scheme complications..."></textarea>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goTo(5)">← Back</button>
+    <button class="btn btn-gold" onclick="generateResults()">🔍 Generate My Assessment →</button>
+  </div>
+</div>
+
+<!-- ===== RESULTS ===== -->
+<div class="section-card" id="results-section">
+  <div class="section-label">Your Assessment</div>
+  <div id="results-content"></div>
+
+  <div class="cta-box">
+    <div>
+      <h3>Ready to take the next step?</h3>
+      <p>Speak with a regulated immigration advisor (OISC Level 2/3) or solicitor for advice specific to your case.</p>
+    </div>
+    <button class="btn btn-gold" onclick="window.print()">🖨️ Print / Save Assessment</button>
+  </div>
+
+  <div style="margin-top:20px; text-align:center;">
+    <button class="btn btn-secondary" onclick="startOver()">← Start a New Assessment</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+let currentSection = 1;
+const totalSections = 6;
+
+function updateProgress() {
+  const pct = ((currentSection - 1) / (totalSections - 1)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `Step ${currentSection} of ${totalSections}`;
+}
+
+function goTo(section) {
+  if (section === 3) {
+    const status = document.querySelector('input[name="status"]:checked');
+    if (!status) { alert('Please select your current immigration status.'); return; }
+    showStatusQuestions(status.value);
+  }
+
+  document.getElementById('sec' + currentSection).style.display = 'none';
+  currentSection = section;
+  const el = document.getElementById('sec' + section);
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  updateProgress();
+}
+
+function showStatusQuestions(status) {
+  const ids = ['q_visitor','q_overstayer','q_skilled','q_student','q_family','q_ilr','q_euss','q_asylum'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  });
+
+  const titles = {
+    visitor: ['Visitor Details', 'Tell us more about your visit to the UK.'],
+    overstayer: ['Overstay Situation', 'Understanding your circumstances is key to identifying options.'],
+    skilled: ['Skilled Worker Details', 'Information about your employment and sponsorship in the UK.'],
+    student: ['Student Visa Details', 'Details about your studies and plans after graduation.'],
+    family: ['Family Visa Details', 'Information about your family relationship and residence.'],
+    ilr: ['ILR / Settled Status', 'You have settled status — let\'s look at your next steps.'],
+    euss: ['EU Settlement Scheme', 'Details about your EUSS status and residence.'],
+    asylum: ['Asylum Situation', 'General information about your asylum claim.'],
+    other: ['Current Situation', 'Tell us more about your immigration situation.']
+  };
+
+  const [title, sub] = titles[status] || titles.other;
+  document.getElementById('sec3Title').textContent = title;
+  document.getElementById('sec3Sub').textContent = sub;
+
+  const map = {
+    visitor: 'q_visitor',
+    overstayer: 'q_overstayer',
+    skilled: 'q_skilled',
+    student: 'q_student',
+    family: 'q_family',
+    ilr: 'q_ilr',
+    euss: 'q_euss',
+    asylum: 'q_asylum'
+  };
+  const target = map[status];
+  if (target) document.getElementById(target).classList.remove('hidden');
+}
+
+// Dynamic show/hide logic
+document.addEventListener('change', function(e) {
+  const name = e.target.name;
+  const val = e.target.value;
+
+  // Outside UK info
+  if (name === 'inUK') {
+    toggle('outsideUK_info', val === 'no');
+  }
+
+  // Criminal warning
+  if (name === 'criminal') {
+    toggle('crim_serious_warn', val === 'serious');
+  }
+
+  // Visitor overstay warning
+  if (name === 'v_overstay_plan') {
+    toggle('visitor_overstay_warn', val === 'yes');
+  }
+
+  // 10 year long residence
+  if (name === 'ov_10yr') {
+    toggle('ten_year_info', val === 'yes' || val === 'unsure');
+  }
+
+  // Removal proceedings
+  if (name === 'ov_removal') {
+    toggle('removal_warn', val === 'yes');
+  }
+
+  // Skilled dependants
+  if (name === 'sw_dependants') {
+    const show = val === 'partner' || val === 'children' || val === 'other';
+    const ds = document.getElementById('dependants_section');
+    if (show) ds.classList.remove('hidden');
+    else ds.classList.add('hidden');
+  }
+
+  // Family breakdown
+  if (name === 'fam_ongoing') {
+    const el = document.getElementById('dv_info');
+    if (el) el.style.display = val === 'no' ? 'block' : 'none';
+  }
+
+  // ILR spouse
+  if (name === 'ilr_bc_spouse') {
+    toggle('ilr_spouse_info', val === 'yes');
+  }
+
+  // Long absence
+  if (name === 'long_absence') {
+    toggle('long_absence_warn', val === 'yes');
+  }
+
+  // Deported
+  if (name === 'deported') {
+    toggle('deport_warn', val === 'yes');
+  }
+
+  // Deception
+  if (name === 'deception') {
+    toggle('deception_warn', val === 'yes');
+  }
+
+  // Public funds
+  if (name === 'pub_funds') {
+    toggle('pub_funds_warn', val === 'yes');
+  }
+
+  // NHS debt
+  if (name === 'nhs_debt') {
+    toggle('nhs_debt_warn', val === 'yes');
+  }
+});
+
+function toggle(id, show) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (show) el.classList.add('show');
+  else el.classList.remove('show');
+}
+
+function generateResults() {
+  const status = document.querySelector('input[name="status"]:checked')?.value || 'unknown';
+  const age = parseInt(document.getElementById('age').value) || 0;
+  const totalYears = document.getElementById('total_years').value;
+  const lifeUK = document.querySelector('input[name="lifeuk"]:checked')?.value || '';
+  const english = document.querySelector('input[name="english"]:checked')?.value || '';
+  const criminal = document.querySelector('input[name="criminal"]:checked')?.value || 'none';
+  const deported = document.querySelector('input[name="deported"]:checked')?.value || 'no';
+  const deception = document.querySelector('input[name="deception"]:checked')?.value || 'no';
+  const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
+  const longAbsence = document.querySelector('input[name="long_absence"]:checked')?.value || 'no';
+  const refusal = document.querySelector('input[name="refusal"]:checked')?.value || 'no';
+  const pubFunds = document.querySelector('input[name="pub_funds"]:checked')?.value || 'no';
+
+  // Calculate years lived (rough)
+  const yearsMap = { 'under_1': 0.5, '1_2': 1.5, '2_5': 3.5, '5_10': 7, 'over_10': 11 };
+  const yearsLived = yearsMap[totalYears] || 0;
+
+  const cards = [];
+  const steps = [];
+  let resultTitle = '';
+  let resultSub = '';
+  let iconClass = 'amber';
+  let iconEmoji = '📋';
+
+  const englishOK = ['fluent','test_passed','degree'].includes(english);
+  const lifeUKOK = lifeUK === 'yes' || lifeUK === 'exempt';
+  const cleanRecord = criminal === 'none';
+  const noDeport = deported === 'no';
+  const noDeception = deception === 'no';
+  const goodCompliance = cleanRecord && noDeport && noDeception;
+
+  // ===================== SKILLED WORKER =====================
+  if (status === 'skilled') {
+    const entryDate = document.getElementById('skilled_entry').value;
+    const salary = document.getElementById('skilled_salary').value;
+    const absences = document.getElementById('skilled_absences').value;
+    const yearsOnVisa = entryDate ? Math.floor((new Date() - new Date(entryDate)) / (1000*60*60*24*365.25)) : 0;
+    const dependants = document.querySelector('input[name="sw_dependants"]:checked')?.value || 'none';
+
+    resultTitle = 'Skilled Worker Assessment';
+    resultSub = `Based on your entry date, you have been on a Skilled Worker / Tier 2 visa for approximately ${yearsOnVisa} year(s).`;
+
+    // ILR at 5 years
+    const ilrEligible = yearsOnVisa >= 5 && absences !== 'over_450' && longAbsence !== 'yes';
+    const ilrPossible = yearsOnVisa >= 4 && yearsOnVisa < 5;
+
+    if (yearsOnVisa >= 5 && goodCompliance && absences === 'under_180' && longAbsence === 'no') {
+      iconClass = 'green'; iconEmoji = '✅';
+      cards.push({ type: 'eligible', icon: '🏠', title: 'ILR (Indefinite Leave to Remain)', status: 'Likely Eligible', detail: 'You appear to meet the 5-year continuous residence requirement for ILR on the Skilled Worker route. You will also need to meet the salary threshold (currently £26,200 or higher for most roles), pass the Life in the UK test, and demonstrate English language proficiency. Apply on SET(O) form.' });
+    } else if (ilrPossible) {
+      cards.push({ type: 'possible', icon: '⏳', title: 'ILR — Coming Soon', status: 'Not Yet Eligible', detail: 'You are approaching the 5-year qualifying period for ILR. You may be able to apply in the coming months. Begin preparing your documents, Life in the UK test, and English evidence now.' });
+    } else if (yearsOnVisa >= 5 && (absences === 'over_450' || longAbsence === 'yes')) {
+      cards.push({ type: 'possible', icon: '⚠️', title: 'ILR — Possible Concerns', status: 'Requires Review', detail: 'You have been here 5+ years but may have residence issues due to absences. The Home Office allows no more than 180 days absence per year on the Skilled Worker route. Seek advice before applying.' });
+    }
+
+    // Naturalisation
+    const natYears = yearsLived >= 5 && (yearsOnVisa + yearsLived) >= 5;
+    if (yearsLived >= 5 || yearsOnVisa >= 5) {
+      const ilrFirst = !(yearsOnVisa >= 5);
+      cards.push({ type: ilrFirst ? 'possible' : 'eligible', icon: '🇬🇧', title: 'British Citizenship (Naturalisation)', status: ilrFirst ? 'Requires ILR First' : 'Potentially Eligible', detail: 'After obtaining ILR and living in the UK for 1 more year (5 total), you may apply for naturalisation. Requirements: 5 years lawful residence, ILR for at least 1 year, Life in the UK test pass, English B1 level+, good character, and no more than 450 days absent in 5 years (no more than 90 days in the final year).' });
+    }
+
+    // Dependants
+    if (dependants !== 'none') {
+      cards.push({ type: 'info', icon: '👨‍👩‍👧', title: 'Dependent Family Members', status: 'Reminder', detail: 'Dependants (partner and children under 18) can apply for ILR at the same time as the main applicant, or shortly after. Each dependant pays the ILR fee separately. Children born in the UK to a parent with limited leave are not automatically British — apply for ILR when you do.' });
+    }
+
+    // Salary concern
+    if (salary === 'under_26k') {
+      cards.push({ type: 'possible', icon: '💷', title: 'Salary Threshold Concern', status: 'Review Required', detail: 'The minimum salary for a Skilled Worker visa is currently £26,200 (or the going rate for your role, whichever is higher). Going under this threshold may affect your extension or ILR application. Check the current threshold for your specific occupation code.' });
+    }
+
+    steps.push('Confirm your exact entry date and calculate your 5-year qualifying date for ILR.');
+    steps.push('Check your absence record — obtain travel history from HMRC/UKVI if unsure.');
+    steps.push('Book (and pass) the Life in the UK test at least 3 months before your ILR application.');
+    steps.push('Gather evidence: payslips, P60s, employer letters, CoS numbers, biometric residence permit.');
+    steps.push('Consider applying for ILR on the SET(O) form — current fee: £2,885 per person (check gov.uk for latest).');
+    if (dependants !== 'none') steps.push('Include dependant applications at the same time as your own.');
+    steps.push('After ILR, wait 12 months then apply for naturalisation if desired.');
+  }
+
+  // ===================== OVERSTAYER =====================
+  else if (status === 'overstayer') {
+    const ov10yr = document.querySelector('input[name="ov_10yr"]:checked')?.value || 'no';
+    const ovPartner = document.querySelector('input[name="ov_partner"]:checked')?.value || 'no';
+    const ovUKChild = document.querySelector('input[name="ov_ukborn_child"]:checked')?.value || 'no';
+    const ovRemoval = document.querySelector('input[name="ov_removal"]:checked')?.value || 'no';
+
+    resultTitle = 'Overstayer — Options Assessment';
+    resultSub = 'Your situation is complex. The options below are general possibilities — you must take proper legal advice for your specific case.';
+    iconEmoji = '⚠️';
+
+    if (ovRemoval === 'yes') {
+      iconClass = 'red';
+      cards.push({ type: 'not-eligible', icon: '🚨', title: 'Active Removal Proceedings', status: 'Urgent — Seek Help Now', detail: 'You have indicated that removal proceedings are underway. You may have very limited time to challenge this. Contact a legal aid solicitor, the Refugee Council, or Bail for Immigration Detainees (BID) immediately if you believe you have grounds to remain.' });
+    }
+
+    if (ov10yr === 'yes' || ov10yr === 'unsure') {
+      cards.push({ type: 'possible', icon: '🏠', title: '10-Year Long Residence ILR', status: 'Potentially Available', detail: 'If you have resided continuously in the UK for 10 years — including periods without leave — you may qualify for ILR under the Long Residence route. The clock stops if you leave the UK. Absences must total under 18 months (no single gap over 6 months). This route requires strong evidence of continuous residence throughout.' });
+    }
+
+    if (ovPartner === 'yes') {
+      cards.push({ type: 'possible', icon: '💍', title: 'Family Life / Article 8 Route', status: 'May Be Available', detail: 'Having a British or settled spouse or partner can form the basis of a human rights claim under Article 8 (family life). You may be able to apply in-country if you meet the financial and relationship requirements. However, overstaying may lead to a refusal; you need specialist advice.' });
+    }
+
+    if (ovUKChild === 'yes_british') {
+      cards.push({ type: 'possible', icon: '👶', title: 'Parent of a British Child', status: 'Potentially Available', detail: 'Being a parent to a British citizen child in the UK can support an application to remain under the family route. You must show that the child genuinely needs you in the UK and that you have sole or shared parental responsibility. Seek advice urgently.' });
+    }
+
+    cards.push({ type: 'info', icon: '🚪', title: 'Voluntary Departure', status: 'Option to Consider', detail: 'Leaving the UK voluntarily (rather than being removed) typically results in a shorter re-entry ban. If you have been an overstayer for under 30 days, you may avoid a ban entirely. The ban can range from 1 to 10 years depending on circumstances.' });
+
+    steps.push('Do NOT leave the UK without taking legal advice first — leaving may trigger a re-entry ban.');
+    steps.push('Consult an OISC Level 2+ regulated advisor or immigration solicitor immediately.');
+    steps.push('Gather all evidence of your continuous residence in the UK (bills, tenancy agreements, bank statements).');
+    if (ovPartner === 'yes') steps.push('Obtain evidence of your relationship (joint accounts, photos, correspondence, cohabitation proof).');
+    if (ov10yr === 'yes') steps.push('Build a complete chronological record of your life in the UK for the 10-year route.');
+  }
+
+  // ===================== VISITOR =====================
+  else if (status === 'visitor') {
+    const purpose = document.querySelector('input[name="visit_purpose"]:checked')?.value || '';
+    const vPartner = document.querySelector('input[name="v_partner"]:checked')?.value || 'no';
+
+    resultTitle = 'Visitor — Assessment';
+    resultSub = 'As a visitor, your options within the UK are limited. Here is what you need to know.';
+    iconEmoji = '🛂';
+
+    cards.push({ type: 'not-eligible', icon: '🚫', title: 'Cannot Switch to Most Visas In-Country', status: 'Important Restriction', detail: 'From inside the UK, visitors generally cannot switch to a work, student, or most other visas. You would need to leave the UK and apply from your home country. Exceptions exist in very limited circumstances.' });
+
+    if (vPartner === 'yes') {
+      cards.push({ type: 'possible', icon: '💍', title: 'Spouse / Partner Visa', status: 'May Be Available (from abroad)', detail: 'If you have a British or settled partner and meet the financial requirements (currently £29,000 minimum income), you may be able to apply for a spouse or partner visa. You would typically need to apply from outside the UK, not switch from a visitor visa.' });
+    }
+
+    if (purpose === 'marriage') {
+      cards.push({ type: 'info', icon: '💒', title: 'Getting Married in the UK', status: 'Note', detail: 'You can get married in the UK on a standard visitor visa. However, if your partner is not British/settled, you cannot sponsor anyone from inside the UK. After marrying a British citizen, apply for a spouse visa from outside the UK.' });
+    }
+
+    cards.push({ type: 'info', icon: '📅', title: 'Visitor Visa Duration', status: 'Reminder', detail: 'Most visitor visas grant 6 months. You cannot extend a standard visitor visa from inside the UK. If you wish to remain longer, you must leave before your leave expires and apply for a different visa from abroad.' });
+
+    steps.push('Check your leave expiry date — do NOT overstay.');
+    steps.push('If you want to remain long-term, consult an advisor about the most appropriate visa route for you.');
+    steps.push('If you have a British partner, explore the spouse / partner visa route for an application from abroad.');
+  }
+
+  // ===================== FAMILY =====================
+  else if (status === 'family') {
+    const famRel = document.querySelector('input[name="fam_rel"]:checked')?.value || '';
+    const famDuration = document.getElementById('fam_duration').value;
+    const famOngoing = document.querySelector('input[name="fam_ongoing"]:checked')?.value || 'yes';
+
+    resultTitle = 'Family Visa — Pathway Assessment';
+    resultSub = 'Your route to ILR and citizenship depends on your relationship type and length of residence.';
+    iconClass = 'green'; iconEmoji = '👨‍👩‍👧';
+
+    if (famDuration === '5_plus' && famOngoing === 'yes') {
+      cards.push({ type: 'eligible', icon: '🏠', title: 'ILR (Indefinite Leave to Remain)', status: 'Likely Eligible', detail: 'After 5 years on a family visa (spouse/partner of a British citizen or settled person), you can apply for ILR. You must demonstrate your relationship is still genuine and subsisting, pass the Life in the UK test, and meet the English language requirement.' });
+    } else if (famDuration === '2_to_5') {
+      cards.push({ type: 'possible', icon: '⏳', title: 'ILR — Approaching Eligibility', status: 'Extension Needed First', detail: 'You are not yet at the 5-year mark for ILR. You should apply to extend your family visa before it expires. The standard family route requires 5 continuous years before ILR can be granted.' });
+    }
+
+    if (famOngoing === 'no') {
+      cards.push({ type: 'info', icon: '💔', title: 'Domestic Violence ILR (DVILR)', status: 'Consider If Applicable', detail: 'If your relationship broke down due to domestic violence or abuse, you may be eligible to apply for ILR immediately under the Domestic Violence concession, regardless of how long you have been in the UK. This is a protective route that does not require the normal qualifying period.' });
+    }
+
+    cards.push({ type: 'info', icon: '🇬🇧', title: 'Citizenship After ILR', status: 'Future Route', detail: 'Once you have ILR and have lived in the UK for a total of 3 years (as a spouse of a British citizen) or 5 years (other routes), you can apply for naturalisation as a British citizen.' });
+
+    steps.push('Ensure your current family visa is still valid — set a renewal reminder 3 months before expiry.');
+    steps.push('Maintain evidence of your ongoing relationship (joint bills, photos, communication records).');
+    steps.push('Pass the Life in the UK test before your ILR application.');
+    if (famDuration === '5_plus') steps.push('Prepare your ILR application on the SET(M) form for spouse/partner route.');
+  }
+
+  // ===================== ILR =====================
+  else if (status === 'ilr') {
+    const ilrDuration = document.getElementById('ilr_duration').value;
+    const ilrTotalTime = document.getElementById('ilr_total_time').value;
+    const ilrSpouse = document.querySelector('input[name="ilr_bc_spouse"]:checked')?.value || 'no';
+    const spouseRoute = ilrSpouse === 'yes';
+    const qualifyNow = (spouseRoute && ilrTotalTime === '5_plus' && ilrDuration !== 'under_1') || (!spouseRoute && ilrTotalTime === '5_plus' && ilrDuration !== 'under_1');
+
+    resultTitle = 'ILR Holder — Citizenship Pathway';
+    resultSub = 'You have settled status — here is your route to British citizenship.';
+    iconClass = 'green'; iconEmoji = '🇬🇧';
+
+    const minYears = spouseRoute ? 3 : 5;
+    const totalYearsOK = ilrTotalTime === '5_plus' || (spouseRoute && ilrTotalTime === '3_to_5');
+
+    if (totalYearsOK && ilrDuration !== 'under_1' && englishOK && goodCompliance) {
+      cards.push({ type: 'eligible', icon: '🇬🇧', title: 'British Citizenship (Naturalisation)', status: 'Likely Eligible', detail: `You appear to meet the residence requirements for naturalisation. As ${spouseRoute ? 'a spouse of a British citizen, you need 3 years lawful residence' : 'an ILR holder, you need 5 years lawful residence'} and ILR for at least 1 year. You must also pass the Life in the UK test, demonstrate English (B1+), and be of "good character." The application fee is currently £1,500 (check gov.uk). Processing takes 6–9 months on average.` });
+    } else {
+      cards.push({ type: 'possible', icon: '⏳', title: 'Citizenship — Approaching Eligibility', status: 'Not Yet Qualifying', detail: `You may need more time before applying. The standard route requires ${minYears} years of continuous lawful residence plus ILR. Build your evidence now and prepare your Life in the UK test.` });
+    }
+
+    if (!lifeUKOK) {
+      cards.push({ type: 'possible', icon: '📚', title: 'Life in the UK Test', status: 'Required — Not Yet Passed', detail: 'You must pass the Life in the UK test before applying for naturalisation. Book at an approved test centre — the fee is £50. Study using the official handbook. You can retake it if you fail.' });
+    }
+
+    if (!englishOK) {
+      cards.push({ type: 'possible', icon: '🗣️', title: 'English Language Requirement', status: 'Not Yet Met', detail: 'For citizenship, you need English at B1 CEFR level or above. This can be evidenced by an approved SELT test (e.g. IELTS Life Skills B1), a degree taught in English, or being a national of a majority English-speaking country.' });
+    }
+
+    steps.push('Check your exact residence and absence history to confirm you meet the qualifying period.');
+    steps.push('Pass the Life in the UK test if you have not already done so.');
+    steps.push('Gather: passport, biometric permit, payslips or tax records, utility bills, bank statements, Life in the UK pass letter, English evidence.');
+    steps.push('Submit your naturalisation application on Form AN via the UKVI online portal.');
+    steps.push('Attend a citizenship ceremony after approval — your certificate of naturalisation will be issued there.');
+  }
+
+  // ===================== EUSS =====================
+  else if (status === 'euss') {
+    const eussType = document.querySelector('input[name="euss_type"]:checked')?.value || '';
+    const eussYears = document.getElementById('euss_years').value;
+
+    resultTitle = 'EU Settlement Scheme Assessment';
+    resultSub = 'Your pathway to ILR and citizenship as an EU/EEA/Swiss national.';
+    iconClass = eussType === 'settled' ? 'green' : 'amber';
+    iconEmoji = '🇪🇺';
+
+    if (eussType === 'settled') {
+      cards.push({ type: 'eligible', icon: '🏠', title: 'EU Settled Status = ILR Equivalent', status: 'Already Settled', detail: 'EU Settled Status is equivalent to ILR. You have the right to live, work, and access public funds in the UK indefinitely. You can now work towards British citizenship.' });
+
+      if ((eussYears === '5_6' || eussYears === 'over_6') && englishOK) {
+        cards.push({ type: 'eligible', icon: '🇬🇧', title: 'British Citizenship (Naturalisation)', status: 'Likely Eligible', detail: 'With 5+ years continuous residence and EU Settled Status, you can apply for naturalisation. You need: 5 years lawful residence, settled status for 12 months, English at B1+, Life in the UK test pass, good character, and under 450 days absent in 5 years.' });
+      }
+    } else if (eussType === 'pre_settled') {
+      cards.push({ type: 'possible', icon: '⏳', title: 'Pre-Settled Status', status: 'Upgrade to Settled When Eligible', detail: 'Pre-Settled Status means you have lived in the UK for less than 5 continuous years. Once you reach 5 years, apply to upgrade to Settled Status (which is free). Do NOT let your Pre-Settled Status expire — re-apply before it does. The Home Office may not automatically upgrade you.' });
+
+      cards.push({ type: 'info', icon: '⚠️', title: 'Re-Apply Before Expiry', status: 'Important Reminder', detail: 'Pre-Settled Status has an expiry date. If it expires before you apply for Settled Status, you will lose your EUSS protection. Set a reminder 6 months before your status expires.' });
+    }
+
+    steps.push('Check your UKVI online account to confirm your current EUSS status and expiry date.');
+    if (eussType === 'pre_settled') steps.push('Calculate when you will reach 5 years continuous residence — apply for Settled Status then.');
+    steps.push('Build your evidence of continuous residence in the UK since the date you first arrived.');
+    if (eussType === 'settled') steps.push('Once settled for 12 months and 5 years total UK residence, consider applying for naturalisation.');
+  }
+
+  // ===================== STUDENT =====================
+  else if (status === 'student') {
+    const stLevel = document.getElementById('student_level').value;
+    const stPost = document.querySelector('input[name="st_post"]:checked')?.value || '';
+
+    resultTitle = 'Student Visa — Next Steps';
+    resultSub = 'Your options after studying depend on your qualifications and plans.';
+    iconEmoji = '🎓';
+
+    if (stPost === 'graduate') {
+      cards.push({ type: 'eligible', icon: '🎓', title: 'Graduate Visa (Post-Study Work)', status: 'Likely Available', detail: 'If you graduate from a UK university with a Bachelor\'s, Master\'s, or PhD, you can apply for a Graduate visa. Bachelor\'s/Master\'s graduates get 2 years; PhD graduates get 3 years. You can work in any role at any salary on this visa. It cannot be extended.' });
+    }
+
+    if (stPost === 'skilled') {
+      cards.push({ type: 'eligible', icon: '💼', title: 'Skilled Worker Visa', status: 'Route to Long-Term Settlement', detail: 'A Skilled Worker visa sponsored by a UK employer is one of the clearest routes to ILR (after 5 years). You need a valid Certificate of Sponsorship (CoS), a qualifying job, and a minimum salary (currently £26,200 or the going rate for the role).' });
+    }
+
+    cards.push({ type: 'info', icon: '⏰', title: 'Timing Your Application', status: 'Important', detail: 'Apply for your next visa (Graduate or Skilled Worker) before your Student visa expires. You can usually apply up to 3 months before your current visa expires. There is a 60-day "grace period" after graduating to apply for the Graduate visa.' });
+
+    steps.push('Check your Student visa expiry date and course completion date.');
+    steps.push('If eligible, apply for the Graduate visa within 60 days of receiving your degree certificate.');
+    steps.push('If you have a job offer, ask your employer to assign a Certificate of Sponsorship (CoS) for a Skilled Worker application.');
+    steps.push('Ensure you have not exceeded your working hours limit during studies.');
+  }
+
+  // ===================== ASYLUM =====================
+  else if (status === 'asylum') {
+    const asyStage = document.querySelector('input[name="asy_stage"]:checked')?.value || '';
+
+    resultTitle = 'Asylum — General Information';
+    resultSub = 'This is a complex area of law. The below is general guidance only. Please seek specialist legal advice.';
+    iconEmoji = '🛡️';
+    iconClass = 'amber';
+
+    if (asyStage === 'granted') {
+      cards.push({ type: 'eligible', icon: '✅', title: 'Refugee Status / Humanitarian Protection', status: 'Granted', detail: 'If you have been granted refugee status or Humanitarian Protection (HP), you will typically be given 5 years limited leave to remain. After 5 years, you can apply for ILR. After ILR, you can apply for British citizenship after 1 more year (6 total).' });
+    } else if (asyStage === 'pending') {
+      cards.push({ type: 'info', icon: '⏳', title: 'Claim Pending', status: 'Awaiting Decision', detail: 'While your claim is pending, you are entitled to asylum support (Section 95) if you are destitute. You cannot work unless your claim has been outstanding for 12+ months with no decision. You must attend all appointments and report any changes of address.' });
+    } else if (asyStage === 'refused') {
+      cards.push({ type: 'possible', icon: '⚠️', title: 'Refused — Consider Appeal', status: 'Time-Sensitive', detail: 'If your claim was refused, you may have the right to appeal to the First-tier Tribunal. The deadline is usually 14 days from the refusal letter. Seek legal help immediately — legal aid may be available.' });
+    }
+
+    cards.push({ type: 'info', icon: '🤝', title: 'Support Organisations', status: 'Get Help', detail: 'Free specialist asylum support is available from: Refugee Action, Refugee Council, Migrant Help, Red Cross, and local law centres. Many offer legal aid-funded advice. Never pay for immigration advice without checking the adviser is OISC-registered.' });
+
+    steps.push('Attend all Home Office appointments and interviews — failure to do so can lead to the claim being deemed withdrawn.');
+    steps.push('Contact a specialist asylum solicitor or charity immediately for support.');
+    steps.push('Keep copies of all documents received from the Home Office, courts, and solicitors.');
+    if (asyStage === 'refused') steps.push('If refused, act within 14 days to lodge an appeal — obtain legal help immediately.');
+  }
+
+  // ===================== DEFAULT =====================
+  else {
+    resultTitle = 'General Assessment';
+    resultSub = 'Based on your answers, here is a general overview of your position.';
+
+    if (yearsLived >= 10 && goodCompliance) {
+      cards.push({ type: 'possible', icon: '🏠', title: '10-Year Long Residence ILR', status: 'Potentially Available', detail: 'With 10+ years of continuous lawful residence in the UK, you may be eligible for ILR under the Long Residence route. This requires no more than 18 months total absence and no single absence over 6 months in the 10-year period.' });
+    }
+
+    cards.push({ type: 'info', icon: '📋', title: 'Seek Professional Advice', status: 'Recommended', detail: 'Given the complexity of your situation, we strongly recommend consulting an OISC-regulated immigration advisor or solicitor. They can assess your specific circumstances and identify the best route forward.' });
+
+    steps.push('Contact an OISC-regulated immigration advisor (Level 2 or Level 3) for your specific situation.');
+    steps.push('Gather all your immigration documents — passports, visa letters, BRP cards, correspondence with Home Office.');
+    steps.push('Check if you qualify for legal aid (if your household income is below the threshold).');
+  }
+
+  // General flags for everyone
+  if (!lifeUKOK && (goal === 'ilr' || goal === 'citizenship')) {
+    cards.push({ type: 'possible', icon: '📚', title: 'Life in the UK Test Required', status: 'Not Yet Done', detail: 'The Life in the UK test is required for ILR and British citizenship applications for all applicants aged 18–64. Book via the official gov.uk website (£50). Prepare using the official handbook. Allow 3+ months before your application.' });
+  }
+
+  if (!englishOK && (goal === 'ilr' || goal === 'citizenship')) {
+    cards.push({ type: 'possible', icon: '🗣️', title: 'English Language Evidence Needed', status: 'Required', detail: 'For ILR and citizenship, you need to prove English at B1 CEFR level or above. Approved Secure English Language Tests (SELTs) include IELTS Life Skills B1. Alternatively, a degree taught in English or citizenship of a majority English-speaking country may satisfy this requirement.' });
+  }
+
+  if (refusal !== 'no') {
+    cards.push({ type: 'possible', icon: '📄', title: 'Previous Visa Refusal', status: 'Disclose Required', detail: 'All UK visa applications require you to disclose previous refusals. A refusal does not automatically bar future applications, but it is important to address the reasons for refusal in any new application. Seek advice on whether grounds have changed.' });
+  }
+
+  // Build the HTML
+  let html = `
+    <div class="result-header">
+      <div class="result-icon ${iconClass}">${iconEmoji}</div>
+      <div>
+        <div class="section-label">Assessment Result</div>
+        <div class="section-title" style="margin-bottom:4px">${resultTitle}</div>
+        <div class="section-subtitle" style="margin-bottom:0">${resultSub}</div>
+      </div>
+    </div>
+    <div class="eligibility-grid">
+  `;
+
+  cards.forEach(card => {
+    const statusColors = { 'eligible': 'color:#14532d', 'possible': 'color:#78350f', 'not-eligible': 'color:#7f1d1d', 'info-card': 'color:#1e3a5f' };
+    html += `
+      <div class="eligibility-card ${card.type === 'info' ? 'info-card' : card.type}">
+        <div class="elig-icon">${card.icon}</div>
+        <div class="elig-content">
+          <div class="elig-status">${card.status}</div>
+          <h3>${card.title}</h3>
+          <p>${card.detail}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `</div>`;
+
+  if (steps.length > 0) {
+    html += `
+      <div class="next-steps">
+        <h3>📋 Recommended Next Steps</h3>
+        <ol>${steps.map(s => `<li>${s}</li>`).join('')}</ol>
+      </div>
+    `;
+  }
+
+  html += `
+    <div class="info-box warning show" style="margin-top:20px">
+      <strong>⚠️ Disclaimer</strong>
+      This assessment is based on general UK immigration rules as of 2024–2025. Immigration law changes frequently. This is not legal advice. Always verify current requirements on gov.uk and consult an OISC-regulated advisor or immigration solicitor for your specific situation.
+    </div>
+  `;
+
+  document.getElementById('results-content').innerHTML = html;
+  document.getElementById('sec6').style.display = 'none';
+  const rs = document.getElementById('results-section');
+  rs.style.display = 'block';
+  currentSection = 6;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = 'Assessment Complete';
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function startOver() {
+  location.reload();
+}
+
+// Init
+updateProgress();
+</script>
+</body>
+</html>
