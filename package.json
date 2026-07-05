@@ -1,0 +1,19 @@
+{
+  "name": "advac",
+  "version": "2.0.0",
+  "description": "UK immigration advice web application — GOV.UK-styled assessment tool with session persistence (magic links), document uploads and a Google Drive integration stub.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "optionalDependencies": {
+    "googleapis": "^140.0.1"
+  }
+}
