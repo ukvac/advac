@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check your UK immigration options — Immigration Advice Service</title>
+<meta name="description" content="Answer questions about your circumstances to get tailored, up-to-date UK immigration guidance with GOV.UK sources. Save your progress by email and upload case documents.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0c0c'/%3E%3Cpath d='M16 6 L26 12 V26 H6 V12 Z' fill='%23ffffff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- GOV.UK Design System-styled header. This is an independent service and
+     deliberately does NOT use the royal crest or claim to be GOV.UK. -->
+<header class="app-header" role="banner">
+  <div class="app-header__inner">
+    <a href="./" class="app-header__logotype">
+      <span class="app-header__crest" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="30" height="30" stroke="#ffffff" stroke-width="2"/>
+          <path d="M16 6 L26 12 V26 H6 V12 Z" fill="#ffffff"/>
+        </svg>
+      </span>
+      Immigration&nbsp;Advice
+    </a>
+  </div>
+</header>
+<div class="service-header">
+  <div class="service-header__inner">
+    <a href="./" class="service-header__name">Check your UK immigration options</a>
+  </div>
+</div>
+
+<div class="phase-banner">
+  <strong class="phase-banner__tag">Beta</strong>
+  <span>This is an independent information tool — it is not GOV.UK and does not provide legal advice.
+  For advice on your case use a <a href="https://www.gov.uk/find-an-immigration-adviser" rel="noopener noreferrer" target="_blank">regulated immigration adviser</a>.</span>
+</div>
+
+<div class="width-container">
+<main id="main-content" role="main">
+
+  <!-- Dynamic notification banner (session restored / saved / errors) -->
+  <div id="banner" class="notification-banner hidden" role="alert">
+    <div class="notification-banner__header" id="bannerTitle">Important</div>
+    <div class="notification-banner__content"><p id="bannerText"></p></div>
+  </div>
+
+  <div class="grid-row">
+    <div class="col-two-thirds">
+
+      <p class="progress-note"><span id="progressText">Question section 1 of 6</span></p>
+      <div class="progress-track" aria-hidden="true"><div class="progress-track__fill" id="progressFill"></div></div>
+
+      <!-- ===== SECTION 1: PERSONAL ===== -->
+      <section class="wizard-section" id="sec1">
+        <span class="caption-l">Section 1 of 6</span>
+        <h1 class="heading-l">Your details</h1>
+        <p class="text-secondary body-s">These basic details help tailor your assessment. Nothing is sent anywhere until you choose to save.</p>
+
+        <div class="form-group">
+          <label class="label" for="age">Your age</label>
+          <input class="input input--width-10" type="number" id="age" min="1" max="120" placeholder="For example, 34">
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="nationality">Nationality</label>
+          <span class="hint">The country of your current passport</span>
+          <input class="input input--width-20" type="text" id="nationality" placeholder="For example, Nigerian">
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="birthCountry">Country of birth</label>
+          <input class="input input--width-20" type="text" id="birthCountry" placeholder="For example, Nigeria">
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Are you currently in the UK?</legend>
+            <div class="radios">
+              <div class="radio-item">
+                <input type="radio" name="inUK" id="inUK_yes" value="yes">
+                <label for="inUK_yes">Yes, I am currently in the UK</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="inUK" id="inUK_no" value="no">
+                <label for="inUK_no">No, I am outside the UK</label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--info" id="outsideUK_info">
+            <strong>Applying from outside the UK</strong>
+            Many routes (family, Skilled Worker, Student) are applied for from abroad. If you do not need a visa to visit,
+            you will still need an <a href="https://www.gov.uk/guidance/apply-for-an-electronic-travel-authorisation-eta" target="_blank" rel="noopener noreferrer">Electronic Travel Authorisation (ETA, £16)</a> before travelling.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Do you have any criminal convictions?</legend>
+            <span class="hint">In the UK or overseas — include spent and unspent convictions</span>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="criminal" id="crim_none" value="none"><label for="crim_none">No convictions</label></div>
+              <div class="radio-item"><input type="radio" name="criminal" id="crim_minor" value="minor"><label for="crim_minor">Minor or spent conviction</label></div>
+              <div class="radio-item"><input type="radio" name="criminal" id="crim_serious" value="serious"><label for="crim_serious">Serious or recent conviction</label></div>
+              <div class="radio-item"><input type="radio" name="criminal" id="crim_unsure" value="unsure"><label for="crim_unsure">Not sure</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--danger" id="crim_serious_warn">
+            <strong>Important</strong>
+            Serious convictions can affect all immigration applications, including ILR and citizenship — and since February 2025
+            the good character rules for citizenship are stricter. Get specialist legal advice before applying for anything.
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="button" onclick="goTo(2)">Continue</button>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 2: CURRENT STATUS ===== -->
+      <section class="wizard-section" id="sec2" style="display:none">
+        <span class="caption-l">Section 2 of 6</span>
+        <h1 class="heading-l">Your current immigration status</h1>
+        <p class="text-secondary body-s">Select the option that best describes your situation right now — this drives the rest of your assessment.</p>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">What is your current immigration status?</legend>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="status" id="st_visitor" value="visitor"><label for="st_visitor">Visitor or tourist<small>Entered on a visit visa, or visa-free with an ETA</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_overstayer" value="overstayer"><label for="st_overstayer">Overstayer<small>My visa or leave has expired and I have not left the UK</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_skilled" value="skilled"><label for="st_skilled">Skilled Worker<small>Sponsored by a UK employer (formerly Tier 2)</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_student" value="student"><label for="st_student">Student<small>Studying with a licensed UK sponsor (formerly Tier 4)</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_family" value="family"><label for="st_family">Family visa<small>Partner, parent or child of a British citizen or settled person</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_ilr" value="ilr"><label for="st_ilr">ILR or settled<small>I already have Indefinite Leave to Remain</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_euss" value="euss"><label for="st_euss">EU Settlement Scheme<small>EU, EEA or Swiss national (or family member) with EUSS status</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_asylum" value="asylum"><label for="st_asylum">Asylum seeker or refugee<small>I have claimed, or am considering claiming, asylum</small></label></div>
+              <div class="radio-item"><input type="radio" name="status" id="st_other" value="other"><label for="st_other">Other or not sure<small>BN(O), Ancestry, Graduate, or unsure of my status</small></label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="goTo(1)">Back</button>
+          <button class="button" onclick="goTo(3)">Continue</button>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 3: STATUS-SPECIFIC QUESTIONS ===== -->
+      <section class="wizard-section" id="sec3" style="display:none">
+        <span class="caption-l">Section 3 of 6</span>
+        <h1 class="heading-l" id="sec3Title">Visa and entry details</h1>
+        <p class="text-secondary body-s" id="sec3Sub">Please provide details about your specific situation.</p>
+
+        <!-- VISITOR -->
+        <div id="q_visitor" class="hidden">
+          <div class="form-group">
+            <label class="label" for="visitor_entry">When did you last enter the UK?</label>
+            <input class="input input--width-10" type="date" id="visitor_entry">
+          </div>
+          <div class="form-group">
+            <label class="label" for="visitor_duration">How long was your visa or permission granted for?</label>
+            <select class="select" id="visitor_duration">
+              <option value="">— Select —</option>
+              <option value="6m">6 months (standard visitor)</option>
+              <option value="6m_marriage">Marriage Visitor visa (6 months)</option>
+              <option value="2y">2 year long-term visit visa</option>
+              <option value="5y">5 year long-term visit visa</option>
+              <option value="10y">10 year long-term visit visa</option>
+              <option value="visa_free">Visa-free entry with an ETA</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">What is the main purpose of your current visit?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="visit_purpose" id="vp_tourism" value="tourism"><label for="vp_tourism">Tourism or holiday</label></div>
+                <div class="radio-item"><input type="radio" name="visit_purpose" id="vp_family_visit" value="family_visit"><label for="vp_family_visit">Visiting family</label></div>
+                <div class="radio-item"><input type="radio" name="visit_purpose" id="vp_business" value="business"><label for="vp_business">Business meetings</label></div>
+                <div class="radio-item"><input type="radio" name="visit_purpose" id="vp_marriage" value="marriage"><label for="vp_marriage">Getting married in the UK</label></div>
+                <div class="radio-item"><input type="radio" name="visit_purpose" id="vp_medical" value="medical"><label for="vp_medical">Medical treatment</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--warning" id="marriage_visitor_note">
+              <strong>Marriage requires the right visa</strong>
+              You cannot marry or form a civil partnership on a standard visit or ETA visa-free entry — you need a
+              <a href="https://www.gov.uk/marriage-visa" target="_blank" rel="noopener noreferrer">Marriage Visitor visa</a> (or a fiancé(e) visa if you plan to stay).
+            </div>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Are you planning to stay beyond your permitted time?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="v_overstay_plan" id="vop_yes" value="yes"><label for="vop_yes">Yes, I want to remain longer</label></div>
+                <div class="radio-item"><input type="radio" name="v_overstay_plan" id="vop_no" value="no"><label for="vop_no">No, I plan to leave before it expires</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--danger" id="visitor_overstay_warn">
+              <strong>Overstaying is a serious breach</strong>
+              Overstaying a visit can lead to removal, a re-entry ban and refusals of future applications. You generally cannot
+              switch from a visit visa to another route from inside the UK — plan to apply from abroad instead.
+            </div>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Do you have a British or settled partner or spouse?</legend>
+              <div class="radios radios--inline">
+                <div class="radio-item"><input type="radio" name="v_partner" id="vpart_yes" value="yes"><label for="vpart_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="v_partner" id="vpart_no" value="no"><label for="vpart_no">No</label></div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- OVERSTAYER -->
+        <div id="q_overstayer" class="hidden">
+          <div class="warning-text">
+            <span class="warning-text__icon" aria-hidden="true">!</span>
+            <span class="warning-text__text">Overstaying is serious, but options may remain. Answer carefully and get regulated advice before acting.</span>
+          </div>
+          <div class="form-group">
+            <label class="label" for="overstay_expired">When did your last valid leave expire?</label>
+            <input class="input input--width-10" type="date" id="overstay_expired">
+          </div>
+          <div class="form-group">
+            <label class="label" for="overstay_visa_type">What type of visa did you originally hold?</label>
+            <select class="select" id="overstay_visa_type">
+              <option value="">— Select original visa type —</option>
+              <option value="visitor">Visitor or tourist</option>
+              <option value="student">Student (Tier 4)</option>
+              <option value="skilled">Skilled Worker (Tier 2)</option>
+              <option value="family">Family (partner or parent)</option>
+              <option value="work_other">Other work visa</option>
+              <option value="eea">EEA or EU (pre-Brexit)</option>
+              <option value="asylum">Asylum (refused)</option>
+              <option value="none">Never had a visa / entered without permission</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Have you applied to regularise your status since overstaying?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="ov_applied" id="ova_yes" value="yes"><label for="ova_yes">Yes, I have submitted an application</label></div>
+                <div class="radio-item"><input type="radio" name="ov_applied" id="ova_no" value="no"><label for="ova_no">No, I have not applied</label></div>
+                <div class="radio-item"><input type="radio" name="ov_applied" id="ova_refused" value="refused"><label for="ova_refused">Yes, but it was refused</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Do you have a British citizen or settled spouse or partner?</legend>
+              <div class="radios radios--inline">
+                <div class="radio-item"><input type="radio" name="ov_partner" id="ovp_yes" value="yes"><label for="ovp_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="ov_partner" id="ovp_no" value="no"><label for="ovp_no">No</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Do you have children born in the UK?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="ov_ukborn_child" id="ovbc_yes_brit" value="yes_british"><label for="ovbc_yes_brit">Yes — and the child is a British citizen</label></div>
+                <div class="radio-item"><input type="radio" name="ov_ukborn_child" id="ovbc_yes_notbrit" value="yes_not_british"><label for="ovbc_yes_notbrit">Yes — but the child is not British</label></div>
+                <div class="radio-item"><input type="radio" name="ov_ukborn_child" id="ovbc_no" value="no"><label for="ovbc_no">No children born in the UK</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">How long have you lived in the UK continuously?</legend>
+              <span class="hint">Include periods with and without leave — different routes apply to each</span>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="ov_10yr" id="ov10_yes" value="yes"><label for="ov10_yes">10 years or more</label></div>
+                <div class="radio-item"><input type="radio" name="ov_10yr" id="ov10_no" value="no"><label for="ov10_no">Fewer than 10 years</label></div>
+                <div class="radio-item"><input type="radio" name="ov_10yr" id="ov10_unsure" value="unsure"><label for="ov10_unsure">Not sure</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--info" id="ten_year_info">
+              <strong>Long residence rules changed in April 2024</strong>
+              ILR after 10 years now requires 10 years of continuous <strong>lawful</strong> residence — time spent overstaying
+              breaks the clock (<a href="https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-long-residence" target="_blank" rel="noopener noreferrer">Appendix Long Residence</a>).
+              If you have been here a very long time without status, the
+              <a href="https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-private-life" target="_blank" rel="noopener noreferrer">private life route</a>
+              (20 years' residence, or 7 years for children, or half your life if aged 18–24) may apply instead. Legal advice is essential.
+            </div>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Are you aware of any removal or deportation proceedings against you?</legend>
+              <div class="radios radios--inline">
+                <div class="radio-item"><input type="radio" name="ov_removal" id="ovr_yes" value="yes"><label for="ovr_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="ov_removal" id="ovr_no" value="no"><label for="ovr_no">No</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--danger" id="removal_warn">
+              <strong>Urgent — get legal help immediately</strong>
+              If removal proceedings are active you may have very little time. Contact an immigration solicitor or an
+              IAA-regulated adviser now. You may be able to appeal or apply for a stay of removal.
+            </div>
+          </div>
+        </div>
+
+        <!-- SKILLED WORKER -->
+        <div id="q_skilled" class="hidden">
+          <div class="form-group">
+            <label class="label" for="skilled_entry">When did you first enter the UK on a Skilled Worker (Tier 2) visa?</label>
+            <input class="input input--width-10" type="date" id="skilled_entry">
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Have you been continuously sponsored?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="sw_same_sponsor" id="sws_yes" value="yes"><label for="sws_yes">Yes, same employer throughout</label></div>
+                <div class="radio-item"><input type="radio" name="sw_same_sponsor" id="sws_changed" value="changed"><label for="sws_changed">I changed employers, with a new Certificate of Sponsorship each time</label></div>
+                <div class="radio-item"><input type="radio" name="sw_same_sponsor" id="sws_gap" value="gap"><label for="sws_gap">There were gaps in my sponsorship</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="label" for="skilled_salary">What is your current annual gross salary?</label>
+            <span class="hint">The standard Skilled Worker threshold has been £41,700 since 22 July 2025 — lower thresholds apply to Immigration Salary List roles, new entrants, PhD holders and Health and Care roles</span>
+            <select class="select" id="skilled_salary">
+              <option value="">— Select salary band —</option>
+              <option value="under_25k">Under £25,000</option>
+              <option value="25k_41699">£25,000 – £41,699</option>
+              <option value="41700_plus">£41,700 or more</option>
+              <option value="unsure">Not sure / varies</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Is your role on the Immigration Salary List, or a Health and Care role?</legend>
+              <span class="hint">The Immigration Salary List replaced the Shortage Occupation List in April 2024</span>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="sw_shortage" id="sho_yes" value="yes"><label for="sho_yes">Yes (for example nurse, doctor, some engineering and construction roles)</label></div>
+                <div class="radio-item"><input type="radio" name="sw_shortage" id="sho_no" value="no"><label for="sho_no">No</label></div>
+                <div class="radio-item"><input type="radio" name="sw_shortage" id="sho_unsure" value="unsure"><label for="sho_unsure">Not sure</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="label" for="skilled_absences">Time spent outside the UK in the last 5 years</label>
+            <span class="hint">Continuous residence for ILR allows no more than 180 days' absence in any rolling 12-month period</span>
+            <select class="select" id="skilled_absences">
+              <option value="">— Select —</option>
+              <option value="under_180">Never more than 180 days in any 12 months</option>
+              <option value="180_450">Possibly over 180 days in some 12-month period</option>
+              <option value="over_450">Definitely over 180 days in a 12-month period</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Do you have dependants in the UK?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="sw_dependants" id="swd_none" value="none"><label for="swd_none">No dependants</label></div>
+                <div class="radio-item"><input type="radio" name="sw_dependants" id="swd_partner" value="partner"><label for="swd_partner">Partner only</label></div>
+                <div class="radio-item"><input type="radio" name="sw_dependants" id="swd_children" value="children"><label for="swd_children">Partner and/or children</label></div>
+                <div class="radio-item"><input type="radio" name="sw_dependants" id="swd_other" value="other"><label for="swd_other">Other family (parents, siblings)</label></div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div id="dependants_section" class="inset-text hidden">
+            <h3 class="heading-s">Dependant details</h3>
+            <div class="form-group">
+              <fieldset>
+                <legend class="label">Are your dependants on visas linked to your Skilled Worker visa?</legend>
+                <div class="radios radios--inline">
+                  <div class="radio-item"><input type="radio" name="dep_visa" id="dv_yes" value="yes"><label for="dv_yes">Yes</label></div>
+                  <div class="radio-item"><input type="radio" name="dep_visa" id="dv_no" value="no"><label for="dv_no">No</label></div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="form-group">
+              <label class="label" for="dep_children_num">How many dependent children do you have in the UK?</label>
+              <select class="select input--width-10" id="dep_children_num">
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4plus">4 or more</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <fieldset>
+                <legend class="label">Were any of your children born in the UK?</legend>
+                <div class="radios radios--inline">
+                  <div class="radio-item"><input type="radio" name="dep_uk_born" id="dub_yes" value="yes"><label for="dub_yes">Yes</label></div>
+                  <div class="radio-item"><input type="radio" name="dep_uk_born" id="dub_no" value="no"><label for="dub_no">No</label></div>
+                </div>
+              </fieldset>
+              <div class="info-box info-box--info show">
+                <strong>Children born in the UK</strong>
+                A child born in the UK to parents with limited leave is not automatically British. Once a parent gets ILR the child
+                can be registered as British — the fee was reduced to £1,000 from 8 April 2026
+                (<a href="https://www.gov.uk/register-british-citizen/child" target="_blank" rel="noopener noreferrer">GOV.UK — register a child</a>).
+              </div>
+            </div>
+            <div class="form-group">
+              <fieldset>
+                <legend class="label">Does your partner work in the UK?</legend>
+                <div class="radios">
+                  <div class="radio-item"><input type="radio" name="dep_partner_work" id="dpw_yes" value="yes"><label for="dpw_yes">Yes, they have the right to work</label></div>
+                  <div class="radio-item"><input type="radio" name="dep_partner_work" id="dpw_no" value="no"><label for="dpw_no">No, they are not working</label></div>
+                  <div class="radio-item"><input type="radio" name="dep_partner_work" id="dpw_na" value="na"><label for="dpw_na">No partner in the UK</label></div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <!-- STUDENT -->
+        <div id="q_student" class="hidden">
+          <div class="form-group">
+            <label class="label" for="student_entry">When did you first arrive in the UK on a Student visa?</label>
+            <input class="input input--width-10" type="date" id="student_entry">
+          </div>
+          <div class="form-group">
+            <label class="label" for="student_level">What level are you studying at?</label>
+            <select class="select" id="student_level">
+              <option value="">— Select —</option>
+              <option value="undergrad">Undergraduate (Bachelor's)</option>
+              <option value="masters">Postgraduate (Master's)</option>
+              <option value="phd">PhD / doctorate</option>
+              <option value="college">College / further education</option>
+              <option value="english">English language course</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Have you worked in the UK during your studies?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="st_work" id="stw_no" value="no"><label for="stw_no">No, I have not worked</label></div>
+                <div class="radio-item"><input type="radio" name="st_work" id="stw_parttime" value="part_time"><label for="stw_parttime">Yes, within my permitted hours</label></div>
+                <div class="radio-item"><input type="radio" name="st_work" id="stw_excess" value="excess"><label for="stw_excess">Yes, but I may have exceeded my hours</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">What are your plans after your course?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="st_post" id="stp_gv" value="graduate"><label for="stp_gv">Apply for the Graduate visa<small>2 years (3 for PhD) if you apply before 1 January 2027; 18 months afterwards</small></label></div>
+                <div class="radio-item"><input type="radio" name="st_post" id="stp_sw" value="skilled"><label for="stp_sw">I have a job offer — Skilled Worker</label></div>
+                <div class="radio-item"><input type="radio" name="st_post" id="stp_no" value="no"><label for="stp_no">No plans yet</label></div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- FAMILY -->
+        <div id="q_family" class="hidden">
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">What is your relationship to the British or settled person?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_spouse" value="spouse"><label for="fr_spouse">Spouse or civil partner of a British citizen</label></div>
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_partner" value="partner"><label for="fr_partner">Unmarried partner<small>Living together in a relationship for at least 2 years</small></label></div>
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_child" value="child"><label for="fr_child">Child (under 18) of a British or settled parent</label></div>
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_adult_child" value="adult_child"><label for="fr_adult_child">Adult child of a British or settled parent</label></div>
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_parent" value="parent"><label for="fr_parent">Parent of a British child</label></div>
+                <div class="radio-item"><input type="radio" name="fam_rel" id="fr_dependent_rel" value="dependent_rel"><label for="fr_dependent_rel">Adult dependent relative<small>Long-term personal care needs</small></label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="label" for="fam_duration">How long have you been in the UK on this family visa?</label>
+            <select class="select input--width-20" id="fam_duration">
+              <option value="">— Select —</option>
+              <option value="under_2">Under 2 years</option>
+              <option value="2_to_5">2–5 years</option>
+              <option value="5_plus">5 or more years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Is your relationship still ongoing?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="fam_ongoing" id="fo_yes" value="yes"><label for="fo_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="fam_ongoing" id="fo_no" value="no"><label for="fo_no">No, the relationship has broken down</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--warning" id="dv_info">
+              <strong>Victims of domestic abuse — immediate settlement route</strong>
+              If your relationship broke down because of domestic abuse, you may be able to apply for settlement straight away under
+              <a href="https://www.gov.uk/settlement-victim-domestic-abuse" target="_blank" rel="noopener noreferrer">Appendix Victim of Domestic Abuse</a>
+              (which replaced the DVILR rules in January 2024), with a fee waiver if needed. Free confidential help: National Domestic Abuse Helpline 0808 2000 247.
+            </div>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Is your British or settled sponsor currently living in the UK?</legend>
+              <div class="radios radios--inline">
+                <div class="radio-item"><input type="radio" name="fam_sponsor_uk" id="fsk_yes" value="yes"><label for="fsk_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="fam_sponsor_uk" id="fsk_no" value="no"><label for="fsk_no">No</label></div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- ILR -->
+        <div id="q_ilr" class="hidden">
+          <div class="info-box info-box--success show">
+            <strong>You already have ILR or settled status</strong>
+            This is a strong foundation. The next step is usually British citizenship, or simply protecting your ILR. A few more details will tailor the guidance.
+          </div>
+          <div class="form-group">
+            <label class="label" for="ilr_duration">How long have you held ILR or settled status?</label>
+            <select class="select input--width-20" id="ilr_duration">
+              <option value="">— Select —</option>
+              <option value="under_1">Under 1 year</option>
+              <option value="1_to_5">1–5 years</option>
+              <option value="over_5">Over 5 years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="ilr_total_time">How long have you lived in the UK in total?</label>
+            <select class="select input--width-20" id="ilr_total_time">
+              <option value="">— Select —</option>
+              <option value="under_3">Under 3 years</option>
+              <option value="3_to_5">3–5 years</option>
+              <option value="5_plus">5 or more years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">Are you married to, or in a civil partnership with, a British citizen?</legend>
+              <div class="radios radios--inline">
+                <div class="radio-item"><input type="radio" name="ilr_bc_spouse" id="ibs_yes" value="yes"><label for="ibs_yes">Yes</label></div>
+                <div class="radio-item"><input type="radio" name="ilr_bc_spouse" id="ibs_no" value="no"><label for="ibs_no">No</label></div>
+              </div>
+            </fieldset>
+            <div class="info-box info-box--info" id="ilr_spouse_info">
+              <strong>Spouses of British citizens — shorter route</strong>
+              You can apply for citizenship after 3 years' residence once you have ILR — and there is no need to wait 12 months
+              after getting ILR (<a href="https://www.gov.uk/apply-citizenship-spouse" target="_blank" rel="noopener noreferrer">GOV.UK</a>).
+            </div>
+          </div>
+        </div>
+
+        <!-- EUSS -->
+        <div id="q_euss" class="hidden">
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">What is your EU Settlement Scheme status?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="euss_type" id="euss_settled" value="settled"><label for="euss_settled">Settled status<small>Granted after 5 years' continuous residence</small></label></div>
+                <div class="radio-item"><input type="radio" name="euss_type" id="euss_pre" value="pre_settled"><label for="euss_pre">Pre-settled status<small>Granted with under 5 years' residence</small></label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="label" for="euss_years">How long have you lived in the UK continuously?</label>
+            <select class="select input--width-20" id="euss_years">
+              <option value="">— Select —</option>
+              <option value="under_1">Under 1 year</option>
+              <option value="1_3">1–3 years</option>
+              <option value="3_5">3–5 years</option>
+              <option value="5_6">5–6 years</option>
+              <option value="over_6">6 or more years</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ASYLUM -->
+        <div id="q_asylum" class="hidden">
+          <div class="info-box info-box--info show">
+            <strong>Asylum claims</strong>
+            Asylum law changed substantially in March 2026 and is highly complex. This tool gives general information only —
+            engage a legal aid solicitor or a specialist organisation (Refugee Council, Refugee Action, Migrant Help) as early as possible.
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <legend class="label">What stage is your asylum claim at?</legend>
+              <div class="radios">
+                <div class="radio-item"><input type="radio" name="asy_stage" id="as_pending" value="pending"><label for="as_pending">Pending — awaiting the initial decision</label></div>
+                <div class="radio-item"><input type="radio" name="asy_stage" id="as_refused" value="refused"><label for="as_refused">Refused — considering an appeal</label></div>
+                <div class="radio-item"><input type="radio" name="asy_stage" id="as_appeal" value="appeal"><label for="as_appeal">On appeal</label></div>
+                <div class="radio-item"><input type="radio" name="asy_stage" id="as_granted" value="granted"><label for="as_granted">Granted — I have refugee status or humanitarian protection</label></div>
+                <div class="radio-item"><input type="radio" name="asy_stage" id="as_notyet" value="not_yet"><label for="as_notyet">I have not yet claimed asylum</label></div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="label" for="asy_country">Country you are fleeing from</label>
+            <input class="input input--width-20" type="text" id="asy_country" placeholder="For example, Eritrea">
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="goTo(2)">Back</button>
+          <button class="button" onclick="goTo(4)">Continue</button>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 4: RESIDENCE, COMPLIANCE & DECISIONS ===== -->
+      <section class="wizard-section" id="sec4" style="display:none">
+        <span class="caption-l">Section 4 of 6</span>
+        <h1 class="heading-l">Residence history, decisions and compliance</h1>
+        <p class="text-secondary body-s">These questions apply to everyone and determine eligibility for long-term routes.</p>
+
+        <div class="form-group">
+          <label class="label" for="total_years">How many years in total have you lived in the UK?</label>
+          <select class="select input--width-20" id="total_years">
+            <option value="">— Select —</option>
+            <option value="under_1">Under 1 year</option>
+            <option value="1_2">1–2 years</option>
+            <option value="2_5">2–5 years</option>
+            <option value="5_10">5–10 years</option>
+            <option value="over_10">Over 10 years</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Have you ever been outside the UK for more than 180 days within a 12-month period?</legend>
+            <div class="radios radios--inline">
+              <div class="radio-item"><input type="radio" name="long_absence" id="la_yes" value="yes"><label for="la_yes">Yes</label></div>
+              <div class="radio-item"><input type="radio" name="long_absence" id="la_no" value="no"><label for="la_no">No</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--warning" id="long_absence_warn">
+            <strong>Absence warning</strong>
+            More than 180 days outside the UK in any rolling 12-month period breaks continuous residence for ILR on most routes,
+            with limited exceptions (serious illness, conflict, some overseas postings). You can
+            <a href="https://www.gov.uk/guidance/request-your-personal-information-from-uk-visas-and-immigration" target="_blank" rel="noopener noreferrer">request your travel history from UKVI</a> to check.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Have you ever had a visa or immigration application refused?</legend>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="refusal" id="ref_no" value="no"><label for="ref_no">No</label></div>
+              <div class="radio-item"><input type="radio" name="refusal" id="ref_yes_uk" value="yes_uk"><label for="ref_yes_uk">Yes — by the UK</label></div>
+              <div class="radio-item"><input type="radio" name="refusal" id="ref_yes_other" value="yes_other"><label for="ref_yes_other">Yes — by another country</label></div>
+              <div class="radio-item"><input type="radio" name="refusal" id="ref_yes_both" value="yes_both"><label for="ref_yes_both">Yes — both</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Are you currently challenging a Home Office decision?</legend>
+            <span class="hint">For example a refusal you are appealing, or a decision under administrative review</span>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="appeal_status" id="ap_none" value="none"><label for="ap_none">No</label></div>
+              <div class="radio-item"><input type="radio" name="appeal_status" id="ap_ftt" value="ftt"><label for="ap_ftt">Yes — First-tier Tribunal appeal</label></div>
+              <div class="radio-item"><input type="radio" name="appeal_status" id="ap_ut" value="ut"><label for="ap_ut">Yes — Upper Tribunal or higher</label></div>
+              <div class="radio-item"><input type="radio" name="appeal_status" id="ap_ar" value="ar"><label for="ap_ar">Yes — administrative review</label></div>
+              <div class="radio-item"><input type="radio" name="appeal_status" id="ap_unsure" value="unsure"><label for="ap_unsure">Not sure</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--info" id="appeal_docs_note">
+            <strong>Upload your decision letters</strong>
+            Deadlines are short (usually 14 days in the UK). Use the <strong>Your documents</strong> panel to upload your refusal
+            letter or appeal papers so the dates and grounds are captured with your saved session.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Have you ever been deported, removed or subject to a re-entry ban from the UK?</legend>
+            <div class="radios radios--inline">
+              <div class="radio-item"><input type="radio" name="deported" id="dep_no" value="no"><label for="dep_no">No</label></div>
+              <div class="radio-item"><input type="radio" name="deported" id="dep_yes" value="yes"><label for="dep_yes">Yes</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--danger" id="deport_warn">
+            <strong>Re-entry ban or deportation history</strong>
+            A previous removal or deportation can bar re-entry for up to 10 years depending on the circumstances. Specialist legal advice is essential.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">What is your level of English?</legend>
+            <span class="hint">Required at B1 level for most ILR and citizenship applications</span>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="english" id="eng_fluent" value="fluent"><label for="eng_fluent">Fluent or native speaker</label></div>
+              <div class="radio-item"><input type="radio" name="english" id="eng_test" value="test_passed"><label for="eng_test">I have passed an approved English test (SELT)</label></div>
+              <div class="radio-item"><input type="radio" name="english" id="eng_degree" value="degree"><label for="eng_degree">I have a degree taught in English</label></div>
+              <div class="radio-item"><input type="radio" name="english" id="eng_limited" value="limited"><label for="eng_limited">Limited or basic English</label></div>
+              <div class="radio-item"><input type="radio" name="english" id="eng_no" value="no"><label for="eng_no">Very little or none</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Have you passed the Life in the UK Test?</legend>
+            <span class="hint">Required for ILR and citizenship unless you are under 18 or 65 and over</span>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="lifeuk" id="luk_yes" value="yes"><label for="luk_yes">Yes, I have passed</label></div>
+              <div class="radio-item"><input type="radio" name="lifeuk" id="luk_no" value="no"><label for="luk_no">Not yet</label></div>
+              <div class="radio-item"><input type="radio" name="lifeuk" id="luk_exempt" value="exempt"><label for="luk_exempt">Exempt (under 18, or 65 and over)</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="goTo(3)">Back</button>
+          <button class="button" onclick="goTo(5)">Continue</button>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 5: FAMILY & GOALS ===== -->
+      <section class="wizard-section" id="sec5" style="display:none">
+        <span class="caption-l">Section 5 of 6</span>
+        <h1 class="heading-l">Family connections and goals</h1>
+        <p class="text-secondary body-s">Your family ties and long-term intentions help identify the best route.</p>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Do you have close family members who are British citizens or settled in the UK?</legend>
+            <span class="hint">Select all that apply</span>
+            <div class="checkboxes" id="family_ties">
+              <div class="checkbox-item"><input type="checkbox" id="ft_british_spouse" value="british_spouse"><label for="ft_british_spouse">British citizen spouse or civil partner</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="ft_settled_partner" value="settled_partner"><label for="ft_settled_partner">Settled (ILR) partner or spouse</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="ft_british_child" value="british_child"><label for="ft_british_child">British citizen child</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="ft_british_parent" value="british_parent"><label for="ft_british_parent">British citizen parent</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="ft_settled_parent" value="settled_parent"><label for="ft_settled_parent">Settled (ILR) parent</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="ft_none" value="none"><label for="ft_none">None of the above</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Do any dependants live with you in the UK?</legend>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="dependants_general" id="dg_none" value="none"><label for="dg_none">No dependants</label></div>
+              <div class="radio-item"><input type="radio" name="dependants_general" id="dg_children" value="children"><label for="dg_children">Children</label></div>
+              <div class="radio-item"><input type="radio" name="dependants_general" id="dg_partner" value="partner"><label for="dg_partner">Partner</label></div>
+              <div class="radio-item"><input type="radio" name="dependants_general" id="dg_both" value="both"><label for="dg_both">Partner and children</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <hr class="section-break">
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">What is your long-term goal?</legend>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="goal" id="g_ilr" value="ilr"><label for="g_ilr">Settle permanently in the UK<small>Indefinite Leave to Remain</small></label></div>
+              <div class="radio-item"><input type="radio" name="goal" id="g_citizen" value="citizenship"><label for="g_citizen">Become a British citizen<small>Naturalisation or registration</small></label></div>
+              <div class="radio-item"><input type="radio" name="goal" id="g_extend" value="extend"><label for="g_extend">Extend my current visa</label></div>
+              <div class="radio-item"><input type="radio" name="goal" id="g_switch" value="switch"><label for="g_switch">Switch to a different visa category</label></div>
+              <div class="radio-item"><input type="radio" name="goal" id="g_family" value="family_reunion"><label for="g_family">Bring family to the UK</label></div>
+              <div class="radio-item"><input type="radio" name="goal" id="g_regularise" value="regularise"><label for="g_regularise">Regularise my status</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Do you own or rent property in the UK?</legend>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="property" id="prop_own" value="own"><label for="prop_own">Own property</label></div>
+              <div class="radio-item"><input type="radio" name="property" id="prop_rent" value="rent"><label for="prop_rent">Renting</label></div>
+              <div class="radio-item"><input type="radio" name="property" id="prop_neither" value="neither"><label for="prop_neither">Neither / staying with others</label></div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Do you have NHS debt or outstanding immigration fees?</legend>
+            <div class="radios radios--inline">
+              <div class="radio-item"><input type="radio" name="nhs_debt" id="nhsd_no" value="no"><label for="nhsd_no">No</label></div>
+              <div class="radio-item"><input type="radio" name="nhs_debt" id="nhsd_yes" value="yes"><label for="nhsd_yes">Yes</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--warning" id="nhs_debt_warn">
+            <strong>NHS debt</strong>
+            Outstanding NHS charges of £500 or more can lead to refusal of applications. Clear or arrange repayment before applying.
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="goTo(4)">Back</button>
+          <button class="button" onclick="goTo(6)">Continue</button>
+        </div>
+      </section>
+
+      <!-- ===== SECTION 6: FINAL ===== -->
+      <section class="wizard-section" id="sec6" style="display:none">
+        <span class="caption-l">Section 6 of 6</span>
+        <h1 class="heading-l">Final details</h1>
+        <p class="text-secondary body-s">A few last questions to complete your assessment profile.</p>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Have you ever used false documents or deception in a UK application?</legend>
+            <div class="radios radios--inline">
+              <div class="radio-item"><input type="radio" name="deception" id="dec_no" value="no"><label for="dec_no">No</label></div>
+              <div class="radio-item"><input type="radio" name="deception" id="dec_yes" value="yes"><label for="dec_yes">Yes</label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--danger" id="deception_warn">
+            <strong>Deception has serious consequences</strong>
+            Using false documents or deception can result in a 10-year ban and refusal on suitability grounds. Take specialist legal advice before any new application.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <legend class="label">Are you currently receiving any public funds?</legend>
+            <span class="hint">For example Universal Credit, Housing Benefit or Child Benefit</span>
+            <div class="radios">
+              <div class="radio-item"><input type="radio" name="pub_funds" id="pf_no" value="no"><label for="pf_no">No</label></div>
+              <div class="radio-item"><input type="radio" name="pub_funds" id="pf_yes" value="yes"><label for="pf_yes">Yes — I receive public funds</label></div>
+              <div class="radio-item"><input type="radio" name="pub_funds" id="pf_entitled" value="entitled"><label for="pf_entitled">Yes — but I am entitled to them<small>For example, ILR holder or refugee</small></label></div>
+            </div>
+          </fieldset>
+          <div class="info-box info-box--warning" id="pub_funds_warn">
+            <strong>No Recourse to Public Funds (NRPF)</strong>
+            Most visa holders are subject to NRPF. Claiming public funds while subject to NRPF breaches your conditions and can
+            affect current and future applications (<a href="https://www.gov.uk/government/publications/public-funds--2" target="_blank" rel="noopener noreferrer">GOV.UK guidance</a>).
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="extra_notes">Anything else relevant to your case? (optional)</label>
+          <textarea class="textarea" id="extra_notes" rows="4" placeholder="For example: pending applications, exceptional circumstances, previous legal representation"></textarea>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="goTo(5)">Back</button>
+          <button class="button" onclick="generateResults()">Get my assessment</button>
+        </div>
+      </section>
+
+      <!-- ===== RESULTS ===== -->
+      <section class="wizard-section" id="results-section" style="display:none">
+        <div id="results-content"></div>
+
+        <div id="qa-section" class="mt-30"></div>
+
+        <div class="inset-text">
+          <h3 class="heading-s">Ready to take the next step?</h3>
+          <p class="body-s mb-0">Speak to an <a href="https://www.gov.uk/find-an-immigration-adviser" target="_blank" rel="noopener noreferrer">IAA-regulated immigration adviser</a> (level 2 or 3) or a solicitor for advice on your specific case. Save this assessment with the panel on the right and share the link with your adviser.</p>
+        </div>
+
+        <div class="button-group">
+          <button class="button button--secondary" onclick="window.print()">Print or save this assessment</button>
+          <button class="button button--warning" onclick="startOver()">Start a new assessment</button>
+        </div>
+      </section>
+
+    </div><!-- /col-two-thirds -->
+
+    <!-- ===== SIDEBAR: SAVE + DOCUMENTS ===== -->
+    <aside class="col-one-third" aria-label="Save progress and documents">
+
+      <div class="side-panel" id="save-panel">
+        <h2>Save your progress</h2>
+        <p>Enter your email and we will send you a secure sign-in link. Opening it — on any device — restores your answers, guidance and document list. No password needed.</p>
+        <label class="label body-s" for="save_email">Email address</label>
+        <input class="input" type="email" id="save_email" autocomplete="email" placeholder="name@example.com">
+        <button class="button" id="save_btn" type="button">Email me a magic link</button>
+        <p class="save-status" id="save_status" role="status"></p>
+      </div>
+
+      <div class="side-panel" id="docs-panel">
+        <h2>Your documents</h2>
+        <p>Upload documents relevant to your case — Home Office refusal letters, appeal decisions, expired BRP cards, visa vignettes or supporting evidence. Files stay with your saved session.</p>
+
+        <label class="label body-s" for="doc_type">Document type</label>
+        <select class="select" id="doc_type" style="font-size:16px;height:40px;margin-bottom:10px;">
+          <option value="refusal-letter">Home Office refusal letter</option>
+          <option value="appeal-decision">Appeal or tribunal decision</option>
+          <option value="brp-card">BRP card (expired) / eVisa share code</option>
+          <option value="visa-vignette">Visa vignette or entry stamp</option>
+          <option value="passport">Passport or travel document</option>
+          <option value="residence-evidence">Evidence of residence</option>
+          <option value="relationship-evidence">Relationship evidence</option>
+          <option value="financial-evidence">Financial evidence</option>
+          <option value="other">Other supporting document</option>
+        </select>
+
+        <div class="upload-drop">
+          <label class="label body-s" for="doc_file">Choose a file (max 10MB)</label>
+          <input type="file" id="doc_file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.heic">
+        </div>
+        <button class="button" id="upload_btn" type="button">Upload document</button>
+        <p class="save-status" id="upload_status" role="status"></p>
+
+        <div id="file-list-wrap"></div>
+      </div>
+
+    </aside>
+  </div><!-- /grid-row -->
+
+</main>
+</div>
+
+<footer class="app-footer" role="contentinfo">
+  <div class="width-container">
+    <p><strong>This service provides general information, not legal advice.</strong>
+    Immigration rules change frequently — figures on this page were checked against GOV.UK in July 2026.
+    Always verify current requirements on <a href="https://www.gov.uk/browse/visas-immigration" rel="noopener noreferrer" target="_blank">GOV.UK</a>
+    and consult a <a href="https://www.gov.uk/find-an-immigration-adviser" rel="noopener noreferrer" target="_blank">regulated immigration adviser</a> before acting.</p>
+    <p class="body-s">Key sources:
+      <a href="https://www.gov.uk/browse/visas-immigration" rel="noopener noreferrer" target="_blank">Visas and immigration</a> ·
+      <a href="https://www.gov.uk/government/publications/visa-regulations-revised-table" rel="noopener noreferrer" target="_blank">Home Office fees</a> ·
+      <a href="https://www.gov.uk/guidance/immigration-rules" rel="noopener noreferrer" target="_blank">Immigration Rules</a> ·
+      <a href="https://www.gov.uk/evisa" rel="noopener noreferrer" target="_blank">eVisas</a>
+    </p>
+  </div>
+</footer>
+
+<script src="js/guidance.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
